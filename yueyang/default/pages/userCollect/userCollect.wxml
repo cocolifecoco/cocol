@@ -1,0 +1,49 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="page userCollect-wrap" id="userCollectPage" data-router="userCollectPage">
+
+  <!-- top -->
+  <view class="userCollect-top">
+    <view class="user-select">请选择需要合并的用户:</view>
+    <view class="user-phone">绑定手机号: {{current_phone}}</view>
+  </view>
+  <!-- /top -->
+
+  <!-- user-message  -->
+  <view class="userCollect-message" user_token="{{userData.user_token}}">
+    <text class="ico-moon icon-userCollect-successS"></text>
+    <text>会员数据: {{userData.nickname}}</text>
+  </view>
+  <!-- /user-message -->
+
+  <!-- bottom  -->
+  <view class="userCollect-bottom">
+    <view class="userCollect-tip">系统检测到您已经是我们的会员，合并后将同步您已有的会员权益</view>
+    <view class="userCollect-confirm" bindtap='userCollectConfirm'>确认</view>
+    <view class="useCollect-reject"  bindtap='userCollectReject'>不合并</view>
+  </view>
+  <!-- /bottom  -->
+
+  <!-- mask  -->
+  <view class="userCollect-mask" wx:if="{{mask_show}}">
+    <view class="userCollect-mask-confirm" wx:if="{{mask_success}}">
+      <view class="ico-moon icon-userCollect-success">
+      </view>
+      <view class="success-tip">
+        <view>用户合并成功</view>
+        <view>提示: 用户信息同步可能稍有延迟,请耐心等待</view>
+      </view>
+      <view class="confirm-btn" bindtap='successConfirm'>确认</view>
+    </view>
+     <view class="userCollect-mask-reject" wx:if="{{!mask_success}}">
+      <view class="ico-moon icon-userCollect-fail">
+      </view>
+      <view class="reject-tip">
+        <view>用户合并失败</view>
+        <view>失败原因: {{failTip}}</view>
+      </view>
+      <view class="confirm-btn"  bindtap='failConfirm'>确认</view>
+    </view> 
+  </view>
+
+  <!-- /mask    -->
+</view>

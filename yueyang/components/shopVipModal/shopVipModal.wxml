@@ -1,0 +1,18 @@
+<!--components/shopVipModal/shopVipModal.wxml-->
+<view class="shopVipModal-wrap" catchtouchmove="stopPropagation" wx:if="{{shopVipModal.showModal}}">
+  <!-- 成为店铺会员 -->
+  <view class="shopVipModal-win shopVipModal-vip" wx:if="{{!shopVipModal.isUp}}">
+    <view class="shopVipModal-vip-top" style="background-image:url({{cdnUrl}}/static/webapp/images/shop_vip.png);">
+      <view class="shopVipModal-closes-wrap"><label catchtap="closeModal" class="ico-moon icon-closes shopVipModal-closes"></label></view>
+      <view class="shopVipModal-p">恭喜你成为本店会员</view>
+      <view class="shopVipModal-p">获得一张会员卡，请到个人中心查看</view>
+    </view>
+    <button class="shopVipModal-button" catchtap="turnToVipCard">去查看</button>
+  </view>
+  <!-- 店铺会员升级 -->
+  <view class="shopVipModal-win shopVipModal-upgrade" wx:if="{{shopVipModal.isUp}}">
+    <view class="shopVipModal-upgrade-top" style="background-image:url({{cdnUrl}}/static/webapp/images/shop_vip_upgrade.png);"><label catchtap="closeModal" class="ico-moon icon-closes shopVipModal-closes"></label></view>
+    <view class="shopVipModal-upgrade-text">请到个人中心查看最新会员权益吧</view>
+    <button class="shopVipModal-button" catchtap="turnToVipCard">去查看</button>
+  </view>
+</view>

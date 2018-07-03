@@ -1,0 +1,353 @@
+@import "../../utils/font_icon.wxss";
+
+.filter-wrap{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 15;
+}
+.filter-bg{
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
+}
+.filter-inner{
+  position: absolute;
+  top: 0;
+  right: -590rpx;
+  width: 550rpx;
+  padding: 0 20rpx;
+  height: 100%;
+  background-color: #fff;
+  transition: right 0.4s 0s ease-in-out;
+  z-index: 1;
+}
+.filter-inner.active{
+  right: 0;
+}
+.filter-box{
+  border-bottom: 1px solid #f3f3f3;
+}
+.filter-box-title{
+  display: inline-block;
+  width: 400rpx;
+  font-size: 24rpx;
+  color: #666;
+  line-height: 72rpx;
+  vertical-align: top;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.filter-box-all{
+  float: right;
+  font-size: 22rpx;
+  color: #999;
+  line-height: 72rpx;
+}
+.filter-head-line{
+  position: absolute;
+  left: -20rpx;
+  top: 20rpx;
+  width: 5rpx;
+  height: 32rpx;
+  background-color: #FF7100;
+  display: none;
+}
+.filter-box-head{
+  position: relative;
+}
+.filter-box-head.active{
+  color: #FF7100;
+}
+.filter-box-head.active .filter-box-title{
+  color: #FF7100;
+}
+.filter-box-head.active .filter-box-all{
+  color: #FF7100;
+}
+.filter-box-head.active .filter-head-line{
+  display: block;
+}
+.filter-box-item{
+  display: inline-block;
+  width: 265rpx;
+  height: 84rpx;
+  border-radius: 6rpx;
+  background-color: #F0F0F0;
+  vertical-align: top;
+}
+.filter-box-content{
+  width: 100%;
+  font-size: 0;
+  margin-bottom: 30rpx;
+}
+.filter-box-content.cate-content{
+  height: 0rpx;
+  margin-bottom: 0;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+.filter-box-item:nth-child(odd){
+  margin-right: 15rpx;
+}
+.filter-box-item:nth-child(n+3){
+  margin-top: 15rpx;
+}
+.cate-content .filter-box-item:nth-last-child(1){
+  margin-bottom: 30rpx;
+}
+.filter-subcate-text{
+  display: inline-block;
+  width: 155rpx;
+  line-height: 84rpx;
+  font-size: 24rpx;
+  color: #333;
+  margin-left: 25rpx;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.filter-subcate-noimg{
+  width: 100%;
+  margin-left: 0;
+}
+.filter-subcate-img{
+  display: inline-block;
+  width: 60rpx;
+  height: 60rpx;
+  vertical-align: top;
+  margin-top: 12rpx;
+  margin-left: 10rpx;
+}
+.filter-box-item.active{
+  background-color: rgba(255, 113, 0, .2);
+}
+.filter-box-item.active .filter-subcate-text{
+  color: #FF7100;
+}
+.filter-price-input{
+  display: inline-block;
+  width: 250rpx;
+  height: 64rpx;
+  line-height: 64rpx;
+  font-size: 24rpx;
+  background-color: #f0f0f0;
+  border-radius: 6rpx;
+  text-align: center;
+}
+.filter-price-input-place{
+  font-size: 24rpx;
+  color: #999;
+  text-align: center;
+}
+.filter-price-line{
+  font-size: 24rpx;
+  padding: 0 15rpx;
+  color: #666;
+  line-height: 64rpx;
+  vertical-align: top;
+}
+.filter-address{
+  display: inline-block;
+  padding: 0 30rpx;
+  line-height: 64rpx;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 24rpx;
+  max-width:370rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: top;
+}
+.filter-address-icon{
+  margin-right: 5rpx;
+}
+.filter-address.active{
+  color: #FF7100;
+  background-color: rgba(255, 113, 0, .2);
+}
+.filter-location{
+  display: inline-block;
+  font-size: 24rpx;
+  color: #999;
+  line-height: 64rpx;
+  margin-left: 20rpx;
+}
+.filter-location-icon{
+  margin-right: 10rpx;
+}
+.filter-bottom{
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 80rpx;
+  border-top: 1px solid #F3F3F3;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  z-index: 10;
+  background-color: #fff;
+}
+.filter-reset{
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  text-align: center;
+  color: #333;
+  line-height: 80rpx;
+}
+.filter-confirm{
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  line-height: 80rpx;
+  text-align: center;
+  color: #fff;
+  background-color: #FF7100;
+}
+.filter-inner-head{
+  width: 590rpx;
+  margin-left: -20rpx;
+  color: #333;
+  font-size: 32rpx;
+  text-align: center;
+  line-height: 100rpx;
+  border-bottom: 1px solid #f3f3f3;
+}
+.filter-inner-head-icon{
+  float: left;
+  width: 50rpx;
+}
+.filter-cate{
+  position: absolute;
+  top: 0;
+  bottom: 82rpx;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.filter-myaddress{
+  z-index: 2;
+}
+.filter-myaddress-list{
+  position: absolute;
+  top: 100rpx;
+  bottom: 82rpx;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.filter-myaddress-item{
+  padding: 25rpx 0;
+  border-bottom: 1px solid #f3f3f3;
+  position: relative;
+}
+.filter-myaddress-icon{
+  display: inline-block;
+  width: 40rpx;
+  color: #999;
+  font-size: 28rpx;
+  line-height: 36rpx;
+  vertical-align: top;
+}
+.filter-myaddress-item .filter-myaddress-gou{
+  position: absolute;
+  top:50%;
+  right: 2rpx;
+  transform: translate(-50%, -50%);
+  text-align: right;
+  vertical-align: middle;
+  display: none;
+}
+.filter-myaddress-text{
+  display: inline-block;
+  width: 450rpx;
+  font-size: 24rpx;
+  line-height: 36rpx;
+  color: #333;
+  vertical-align: top;
+}
+.filter-myaddress-item.active .filter-myaddress-text{
+  color: #FF7100;
+}
+.filter-myaddress-item.active .filter-myaddress-icon{
+  display: inline-block;
+  color: #FF7100;
+}
+.filter-area{
+  z-index: 3;
+}
+.filter-choose-area{
+  height: 80rpx;
+  font-size: 24rpx;
+  color: #333;
+  line-height: 80rpx;
+  border-bottom: 1px solid #f3f3f3;
+}
+.filter-choose-item{
+  display: inline-block;
+  margin-right: 40rpx;
+  max-width: 150rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: top;
+}
+.filter-choose-item:last-child{
+  margin-right: 0;
+}
+.filter-choose-item.active{
+  color: #FF7100;
+  line-height: 80rpx;
+  border-bottom: 1px solid #FF7100;
+}
+.filter-area-item{
+  color: #333;
+  font-size: 24rpx;
+  line-height: 74rpx;
+}
+.filter-area-text{
+  display: inline-block;
+  max-width: 500rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.filter-area-gou{
+  float: right;
+  display: none;
+}
+.filter-area-list{
+  position: absolute;
+  top: 186rpx;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0 20rpx;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.filter-area-item.active{
+  color: #FF7100;
+}
+.filter-area-item.active .filter-area-gou{
+  display: inline-block;
+}
+.clearfix:after {
+  content: "";
+  display: block;
+  visibility: hidden;
+  clear: both;
+  height: 0;
+  font-size: 0;
+}

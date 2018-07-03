@@ -1,0 +1,35 @@
+<view style="{{announce.style}} height: {{announce.customFeature.height * 750 / 320}}rpx;line-height: {{announce.customFeature.height * 750 / 320}}rpx;" class="announce" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+  <view wx:if="{{announce.customFeature.mode === 0}}" class="announce-mode">
+    <view wx:if="{{isIconFlag}}" class="ico-moon icon-{{announce.customFeature.selectImg}} announce-icon" style="color: {{announce.customFeature.lineBackgroundColor}}"></view>
+    <view wx:else class="announce-icon"><image src="{{announce.customFeature.selectImg}}"></image></view>
+    <view class="scroll-box" style="max-width: {{announce.customFeature.width * announce.content.length * 750 / 320}}rpx;">
+      <view class="scroll-content0" style="animation: scroll {{8 * announce.content.length}}s linear infinite;">
+        <block wx:for="{{announce.content}}" wx:key="">
+          <navigator wx:if="{{announce.canIUseNavigatorTarget && item.customFeature.action == 'turn-to-xcx'}}" class="announce-content" target="miniProgram" open-type="navigate" app-id="{{item.customFeature['xcx-appid']}}" path="{{item.customFeature['xcx-page-url'] || ''}}" version="release" 
+            style="max-width: {{announce.customFeature.width * 750 / 320}}rpx">
+            {{item.secContent}}
+          </navigator>
+          <view wx:else class="announce-content" style="max-width: {{announce.customFeature.width * 750 / 320}}rpx" data-event-params="{{item.eventParams}}" catchtap="{{item.eventHandler}}">
+            {{item.secContent}}
+          </view>
+        </block>
+      </view>
+    </view>
+  </view>
+  <view wx:else class="announce-mode announce-mode1">
+    <view wx:if="{{isIconFlag}}" class="ico-moon icon-{{announce.customFeature.selectImg}} announce-icon" style="color: {{announce.customFeature.lineBackgroundColor}}"></view>
+    <view wx:else class="announce-icon"><image src="{{announce.customFeature.selectImg}}"></image></view>
+    <view style="display: inline-block;">
+      <block wx:for="{{announce.content}}" wx:key="">
+        <navigator wx:if="{{announce.canIUseNavigatorTarget && item.customFeature.action == 'turn-to-xcx'}}" class="scroll-content1" target="miniProgram" open-type="navigate" app-id="{{item.customFeature['xcx-appid']}}" path="{{item.customFeature['xcx-page-url'] || ''}}" version="release" 
+          style="top:{{scrollContentHeight * 750 / 320}}rpx;max-width: {{announce.customFeature.width * 750 / 320 - 70}}rpx">
+          {{item.secContent}}
+        </navigator>
+        <view wx:else class="scroll-content1" style="top:{{scrollContentHeight * 750 / 320}}rpx;max-width: {{announce.customFeature.width * 750 / 320 - 70}}rpx"
+          data-event-params="{{item.eventParams}}" catchtap="{{item.eventHandler}}">
+          {{item.secContent}}
+        </view>
+      </block>
+    </view>
+  </view>
+</view>

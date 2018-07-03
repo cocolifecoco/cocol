@@ -1,0 +1,66 @@
+/**   
+    组件对应 wxss 文件的样式，只对组件wxml内的节点生效。编写组件样式时，需要注意以下几点： 
+    组件和引用组件的页面不能使用id选择器（#a）、属性选择器（[a]）和标签名选择器，请改用class选择器。
+    组件和引用组件的页面应尽量避免在样式中使用后代选择器（.a .b），否则可能导致不可预料的结果。
+    子元素选择器（.a>.b）只能用于 view 组件与其子节点之间，不可用于其他组件，否则可能导致不可预料的结果。
+    继承样式，如 font 、 color ，会从组件外继承到组件内。
+    除继承样式外， app.wxss 中的样式、组件所在页面的的样式对自定义组件无效。
+    #a { }     在组件中不能使用
+    [a] { }  在组件中不能使用 
+    button { }   在组件中不能使用 
+    .a > .b { } 除非 .a 是 view 组件节点，否则不一定会生效
+*/
+@import "../../utils/font_icon.wxss";
+
+.announce {
+  overflow: hidden;
+}
+.announce .scroll-box {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: middle;
+}
+.scroll-content0 {
+  position: relative;
+}
+@keyframes scroll {
+  from {left: 0;}
+  to {left: -100%;}
+}
+.scroll-content0 .announce-content:first-child {
+  padding-left: 0;
+}
+.scroll-content0 .announce-content {
+  padding-left: 10px; 
+}
+.announce-content {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align:top;
+  text-overflow: ellipsis;
+}
+.scroll-content1 {
+  position: relative;
+  top: 0;
+  transition: all 1s;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.announce-icon {
+  padding: 0 5px;
+  width: 25px;
+  text-align: center;
+  line-height: inherit;
+  display: inline-block;
+  vertical-align: middle;
+}
+.announce-icon image {
+  width: 25px;
+  height: 25px;
+}
+.announce-mode {
+  white-space: nowrap;
+}
+.announce-mode1 .announce-icon {
+  vertical-align: top;
+}

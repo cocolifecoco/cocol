@@ -1,0 +1,135 @@
+page {
+  background-color: #f0eff5;
+}
+
+.userCollect-wrap {
+  color: #000;
+  font-family: PingFang-SC-Medium;
+}
+
+.userCollect-top {
+  padding: 60rpx 40rpx 35rpx;
+  font-size: 36rpx;
+}
+
+.userCollect-top .user-select {
+  font-family: PingFang-SC-Bold;
+  margin-bottom: 15rpx;
+}
+
+.userCollect-message {
+  padding: 30rpx 40rpx;
+  background: #fff;
+  font-size: 34rpx;
+}
+
+.userCollect-bottom {
+  padding: 35rpx 40rpx;
+  font-size: 34rpx;
+}
+
+.userCollect-bottom .userCollect-tip {
+  color: #707070;
+  font-size: 30rpx;
+}
+
+.userCollect-bottom .userCollect-confirm {
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #fff;
+  margin: 50rpx 0 30rpx;
+  background: #55b737;
+  border-radius: 10rpx;
+  text-align: center;
+}
+
+.userCollect-bottom .useCollect-reject {
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #55b737;
+  margin: 30rpx 0;
+  border: 1px solid #55b737;
+  border-radius: 10rpx;
+  text-align: center;
+}
+
+.userCollect-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(25, 25, 25, 0.5);
+}
+
+.userCollect-mask-confirm,
+.userCollect-mask-reject {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  text-align: center;
+  border: 1px solid #fff;
+  background: #fff;
+  border-radius: 16rpx;
+  padding-top: 60rpx;
+}
+
+.userCollect-message .ico-moon {
+  border-radius: 50%;
+  text-align: center;
+  line-height: 45rpx;
+  color: #15BB0F;
+  font-size: 45rpx;
+  position: relative;
+  top: 7rpx;
+  margin-right: 23rpx;
+}
+
+.userCollect-mask .ico-moon {
+  border-radius: 50%;
+  text-align: center;
+  font-size: 130rpx;
+  margin-bottom: 53rpx;
+}
+
+.userCollect-mask .icon-userCollect-success {
+  color: #15BB0F;
+}
+
+.userCollect-mask .icon-userCollect-fail {
+  color: #F76260;
+}
+
+.userCollect-mask .reject-tip view:first-of-type {
+  font-size: 36rpx;
+  color: #000;
+}
+
+.userCollect-mask .reject-tip view:nth-last-child(1) {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.userCollect-mask .success-tip {
+  color: #333;
+  font-size: 32rpx;
+  padding: 0 75rpx;
+}
+
+.userCollect-mask .success-tip view:nth-child(1),
+.userCollect-mask .reject-tip view:nth-child(1) {
+  color: #000;
+  font-size: 36rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+}
+
+.userCollect-mask .confirm-btn {
+  color: #19AD19;
+  font-size: 36rpx;
+  margin-top: 45rpx;
+  border-top: 1px solid #B8B8B8;
+  padding: 40rpx 75rpx;
+}

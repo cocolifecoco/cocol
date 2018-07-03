@@ -1,0 +1,11 @@
+<!--components/rewardPointModal/rewardPointModal.wxml-->
+<view class="rewardPointModal-wrap" catchtouchmove="stopPropagation" wx:if="{{rewardPointObj.showModal}}">
+  <view class="rewardPointModal-win">
+    <view class="rewardPointModal-bg" style="background-image:{{'url('+cdnUrl+'/static/webapp/images/reward_bg.png),url('+cdnUrl+'/static/webapp/images/reward_coin.png);'}}"><label catchtap="closeModal" class="ico-moon icon-closes rewardPointModal-closes"></label></view>
+    <view class="rewardPointModal-text">
+      <view class="rewardPointModal-p1">恭喜你</view>
+      <view class="rewardPointModal-p2">获得<text class="rewardPointModal-rewardCount">{{rewardPointObj.count}}积分</text></view>
+    </view>
+    <button class="rewardPointModal-button" catchtap="closeModal">知道了</button>
+  </view>
+</view>

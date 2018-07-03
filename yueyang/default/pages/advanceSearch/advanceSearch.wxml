@@ -1,0 +1,20 @@
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<view class="comp-search">
+  <view class="ico-moon icon-location locate hide" bindtap="filterByLocation">全国</view>
+  <view class="search-wrap">
+    <icon size="14" type="search" bindtap="searchList" />
+    <input id="search" value="{{inputContent}}" bindinput="bindChange" bindconfirm="searchList" focus="true" name="input" placeholder="请输入搜索关键词" confirm-type="search" focus />
+    <view class="cross {{inputContent == '' ? 'hide' : ''}}" bindtap="clearSearch">×</view>
+  </view>
+  <button class="cancel" bindtap="navigateBack">取消</button>
+</view>
+
+<view class="history">
+  <view class="title">
+    <text class="left">历史搜索</text>
+    <text class="right" bindtap="clearHistory">清除</text>
+  </view>
+  <view class="content">
+    <view class="history-item" wx:for="{{history}}" wx:key="" data-tag="{{item}}" bindtap="quickSearch">{{item}}</view>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+<view class="form-pay-dialog" hidden="{{!formInfo.show}}">
+  <view class="form-title">付款给 {{formInfo.name}} <image class="cheques-img" src="{{formInfo.logo}}"></image></view>
+  <view class="form-content">
+    <view style="color: #333;"><text>￥</text><text class="form-price">{{formInfo.price}}</text></view>
+    <block wx:if="{{formInfo.isDiscount}}">
+      <picker range="{{formInfo.discountList}}" bindchange="discountChange" range-key="title" value="{{formInfo.selectDiscountIndex}}">
+        <view class="picker"><text class="left-label">使用优惠</text> <text style="color: #ff7100;">{{formInfo.selectDiscountInfo.name}}</text><text class="ico-moon icon-downarrow" style="float:right;line-height:1rem;"></text></view>
+      </picker>
+      <view><text class="left-label" style="height: 32px;line-height: 32px;">使用储值抵扣</text><text wx:if="{{formInfo.useBalance}}" style="color: #ff7100;">抵{{formInfo.use_balance_count}}元</text><switch class="pull-right" checked="{{ formInfo.useBalance }}" type="switch" bindchange="ifUseBalance"/></view>
+    </block>
+    <view class="marign-top"><text class="left-label">备注</text><textarea class="remarks" bindinput="inputRemark" value="{{remark}}"></textarea></view>
+    <view class="marign-top actual-pay"><text class="left-label">实际付款</text><text style="color: #ff7100;float: right;" >￥<text class="actual-price">{{formInfo.totalPayment}}</text></text></view>
+    <button class="pay-btn marign-top" bindtap="confirmPay">确认支付</button>
+    <view class="ico-moon icon-closes" bindtap="closeDialog"></view>
+  </view>
+</view>

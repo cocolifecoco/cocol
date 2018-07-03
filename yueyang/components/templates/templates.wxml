@@ -1,0 +1,1427 @@
+<!-- 图片 -->
+<wxs module="pictureWxsModule">
+  var isArray = function(array) {
+    return array.join ? true : false;
+  }
+  module.exports.isArray = isArray;
+</wxs>
+<template name="zcPicture">
+  <block wx:if="{{real_value && (data.customFeature.action !== 'call' || data.customFeature.phoneDisplayContent !== 'static')}}">
+    <block wx:if="{{pictureWxsModule.isArray(real_value)}}">
+      <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+        <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+          <view class="element picture" style="{{data.style}}" wx:for="{{real_value}}" wx:key="" bindanimationend="animationEnd" data-compid="{{ data.compId }}"> 
+            <image src="{{real_value[index]}}" mode="scaleToFill"></image>
+          </view>
+        </navigator>
+      </block>
+      <block wx:else>
+        <view data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element picture" style="{{data.style}}" wx:for="{{real_value}}" wx:key="" data-event-params="{{data.eventParams}}" data-img="{{real_value[index]}}" data-imgArr="{{real_value}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}"> 
+          <image src="{{real_value[index]}}" mode="scaleToFill"></image>
+        </view>
+      </block>
+    </block>
+    <block wx:else>
+      <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+        <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+          <view class="element picture" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+            <image src="{{real_value}}" mode="scaleToFill"></image>
+          </view>
+        </navigator>
+      </block>
+      <block wx:else>
+        <view data-compdata="{{ data }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-img="{{real_value}}" data-imgArr="{{real_value}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+          <image src="{{real_value}}" mode="scaleToFill"></image>
+        </view>
+      </block>
+    </block>
+  </block>
+  <block wx:elif="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+    <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+      <view class="element picture" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+        <image src="{{data.content}}" mode="scaleToFill"></image>
+      </view>
+    </navigator>
+  </block>
+  <block wx:else>
+    <view data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-img="{{data.content}}" data-imgArr="{{data.content}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <image src="{{data.content}}" mode="scaleToFill"></image>
+    </view>
+  </block>
+</template>
+
+<!-- 按钮 -->
+<wxs module="buttonWxsModule">
+var isArray = function(array) {
+  return array instanceof Array;
+}
+module.exports.isArray = isArray;
+</wxs>
+<template name="zcButton">
+  <block wx:if="{{real_value}}">
+    <block wx:if="{{buttonWxsModule.isArray(real_value)}}">
+      <block wx:if="{{data.customFeature.action == 'share'}}">
+        <button class="element button" open-type="{{data.customFeature.action}}" style="{{data.style}}" data-desc="{{data.customFeature.desc}}" catchtap="onShareAppMessage" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+          <view class="wxParse">
+            <template is="wxParse" data="{{wxParseData: real_value}}"/>
+          </view>
+        </button>
+      </block>
+      <block wx:elif="{{data.customFeature.action == 'contact'}}">
+        <button class="element button" open-type="{{data.customFeature.action}}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+          <view class="wxParse">
+            <template is="wxParse" data="{{wxParseData: real_value}}"/>
+          </view>
+        </button>
+      </block>
+      <block wx:elif="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+        <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+          <label class="element button" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+            <view class="wxParse">
+              <template is="wxParse" data="{{wxParseData: real_value}}"/>
+            </view>
+          </label>
+        </navigator>
+      </block>
+      <block wx:else>
+        <label class="element button" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+          <view class="wxParse">
+            <template is="wxParse" data="{{wxParseData: real_value}}"/>
+          </view>
+        </label>
+      </block>
+    </block>
+    <block wx:else>
+      <block wx:if="{{data.customFeature.action == 'share'}}">
+        <button class="element button" open-type="{{data.customFeature.action}}" style="{{data.style}}" data-desc="{{data.customFeature.desc}}" catchtap="onShareAppMessage" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+          {{real_value}}
+        </button>
+      </block>
+      <block wx:elif="{{data.customFeature.action == 'contact'}}">
+        <button class="element button" open-type="{{data.customFeature.action}}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+          {{data.content}}
+        </button>
+      </block>
+      <block wx:elif="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+        <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+          <label class="element button" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+            {{real_value}}
+          </label>
+        </navigator>
+      </block>
+      <block wx:else>
+        <label class="element button" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+          {{real_value}}
+        </label>
+      </block>
+    </block>
+  </block>
+  <block wx:else>
+    <block wx:if="{{data.customFeature.action == 'share' }}">
+      <button class="element button" open-type="{{data.customFeature.action}}" style="{{data.style}}" data-desc="{{data.customFeature.desc}}" catchtap="onShareAppMessage" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+        {{data.content}}
+      </button>
+    </block>
+    <block wx:elif="{{data.customFeature.action == 'contact'}}">
+      <button class="element button" open-type="{{data.customFeature.action}}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+        {{data.content}}
+      </button>
+    </block>
+    <block wx:elif="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+      <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+        <label class="element button" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+          {{data.content}}
+        </label>
+      </navigator>
+    </block>
+    <block wx:else>
+      <label class="element button" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+        {{data.content}}
+      </label>
+    </block>
+  </block>
+</template>
+
+<!-- 文本 -->
+<import src="../../components/wxParse/wxParse.wxml"/>
+<wxs module="textWxsModule">
+  var isArray = function(array) {
+    return array instanceof Array;
+  }
+  module.exports.isArray = isArray;
+</wxs>
+<template name="zcText">
+  <block wx:if="{{real_value && (data.customFeature.action !== 'call' || data.customFeature.phoneDisplayContent !== 'static')}}">
+    <block wx:if="{{textWxsModule.isArray(real_value)}}">
+      <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+        <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+          <view class="element text {{data.customFeature.isWordWrap == 1 ? 'text-word-wrap' : '' }}" style="{{data.style}}{{data.customFeature.isWordWrap == 1 ? '-webkit-line-clamp:' + data.customFeature['word-wrap'] : ''}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+            <block wx:if="{{ parent_form === 'form' }}">
+              {{ real_value }}
+            </block>
+            <block wx:else>
+              <view class="wxParse">
+                <template is="wxParse" data="{{wxParseData: real_value}}"/>
+              </view>
+            </block>
+          </view>
+        </navigator>
+      </block>
+      <block wx:else>
+        <view data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element text {{data.customFeature.isWordWrap == 1 ? 'text-word-wrap' : '' }}" style="{{data.style}}{{data.customFeature.isWordWrap == 1 ? '-webkit-line-clamp:' + data.customFeature['word-wrap'] : ''}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+          <block wx:if="{{ parent_form === 'form' }}">
+            {{ real_value }}
+          </block>
+          <block wx:else>
+            <view class="wxParse">
+              <template is="wxParse" data="{{wxParseData: real_value}}"/>
+            </view>
+          </block>
+        </view>
+      </block>
+    </block>
+    <block wx:else>
+      <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+        <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+          <text class="element text {{data.customFeature.isWordWrap == 1 ? 'text-word-wrap' : '' }}" style="{{data.style}}{{data.customFeature.isWordWrap == 1 ? '-webkit-line-clamp:' + data.customFeature['word-wrap'] : ''}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">{{data.customFeature.phoneDisplayContent === 'static' ? data.content : real_value}}</text>
+        </navigator>
+      </block>
+      <block wx:else>
+        <text data-compdata="{{ data }}" class="element text {{data.customFeature.isWordWrap == 1 ? 'text-word-wrap' : '' }}" style="{{data.style}}{{data.customFeature.isWordWrap == 1 ? '-webkit-line-clamp:' + data.customFeature['word-wrap'] : ''}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">{{data.customFeature.phoneDisplayContent === 'static' ? data.content : real_value}}</text>
+      </block>
+    </block>
+  </block>
+  <block wx:elif="{{data.customFeature.segment == 'default_map' && form_data}}" >
+  <!-- 动态列表绑定地图 -->
+    <text class="element text {{data.customFeature.isWordWrap == 1 ? 'text-word-wrap' : '' }}" style="{{data.style}}{{data.customFeature.isWordWrap == 1 ? '-webkit-line-clamp:' + data.customFeature['word-wrap'] : ''}}" data-latitude="{{form_data.region_lat}}" data-longitude="{{form_data.region_lng}}" data-address="{{(form_data.region_string || '') + (form_data.region_detail || '')}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}">{{(form_data.region_string || '') + (form_data.region_detail || '')}}</text>
+  </block>
+  <block wx:elif="{{data.customFeature.segment == 'default_map'}}" >
+  <!-- 详情页绑定地图 -->
+    <text class="element text {{data.customFeature.isWordWrap == 1 ? 'text-word-wrap' : '' }}" style="{{data.style}}{{data.customFeature.isWordWrap == 1 ? '-webkit-line-clamp:' + data.customFeature['word-wrap'] : ''}}" data-latitude="{{detail_data.region_lat}}" data-longitude="{{detail_data.region_lng}}" data-address="{{(detail_data.region_string || '') + (detail_data.region_detail || '')}}" catchtap="textToMap">{{((detail_data.region_string || '') + (detail_data.region_detail || '')) || detail_data.default_map[0].text}}</text>
+  </block>
+  <block wx:elif="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+    <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+      <text class="element text {{data.customFeature.isWordWrap == 1 ? 'text-word-wrap' : '' }}" style="{{data.style}}{{data.customFeature.isWordWrap == 1 ? '-webkit-line-clamp:' + data.customFeature['word-wrap'] : ''}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">{{data.content}}</text>
+    </navigator>
+  </block>
+  <block wx:else>
+    <text data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element text {{data.customFeature.isWordWrap == 1 ? 'text-word-wrap' : '' }}" style="{{data.style}}{{data.customFeature.isWordWrap == 1 ? '-webkit-line-clamp:' + data.customFeature['word-wrap'] : ''}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">{{data.content}}</text>
+  </block>
+</template>
+
+<!-- 标题 -->
+<template name="zcTitle">
+  <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+    <view class="element title-ele {{ 'title-mode'+ (data.mode ? data.mode : '') }}" mode="{{data.mode}}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+        <view class="title-content">
+          <view class="title-text">
+            <text class="mark" style="{{'background-color: ' + data.markColor}}"></text>
+            <text class="js-text">{{data.content}}</text>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="element title-ele {{ 'title-mode'+ (data.mode ? data.mode : '') }}" mode="{{data.mode}}" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <view class="title-content">
+        <view class="title-text">
+          <text class="mark" style="{{'background-color: ' + data.markColor}}"></text>
+          <text class="js-text">{{data.content}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+</template>
+
+<!-- 图集 -->
+<template name="zcAlbum">
+  <wxs module="albumWxsModule">
+      var scrollHeight = function(customFeature) {
+          return (parseInt(customFeature.imgHeight)  + (parseInt(customFeature.textHeight) || 14) * 1.6) * 2.34375 ;
+      }
+      module.exports.scrollHeight = scrollHeight;
+  </wxs>
+  <view class="element album {{data.html_mode}}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class='album-container sideslip' wx:if="{{data.customFeature.isSideslip}}">
+      <scroll-view scroll-x="{{true}}" style="{{'height: '+albumWxsModule.scrollHeight(data.customFeature)+'rpx;padding-top:'+ data.customFeature['padding-top']+'px;white-space:nowrap;'}}">
+        <block wx:for="{{data.li}}" wx:key="">
+          <block wx:if="{{data.canIUseNavigatorTarget && item.customFeature.action == 'turn-to-xcx'}}">
+            <view class="{{item.li_class}}" style="{{'width:'+data.customFeature.width+';margin-left:'+data.customFeature['padding-left']+'px;'+ (index == data.li.length - 1 ? 'margin-right:'+data.customFeature['padding-left']+'px' : '')  }}">
+              <navigator target="miniProgram" open-type="navigate" app-id="{{item.customFeature['xcx-appid']}}" path="{{item.customFeature['xcx-page-url'] || ''}}" version="release">
+                <image src="{{item.pic}}" style="{{item.img_style}}display:block;height: {{data.customFeature.imgHeight}};" mode="scaleToFill"></image>
+                <text class="title">{{item.title}}</text>
+              </navigator>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="{{item.li_class}}"
+              style="{{'width:'+data.customFeature.width+';margin-left:'+data.customFeature['padding-left']+'px;'+ (index == data.li.length - 1 ? 'margin-right:'+data.customFeature['padding-left']+'px' : '')  }}"
+              data-event-params="{{item.eventParams}}"
+              catchtap="{{item.eventHandler}}">
+              <image src="{{item.pic}}" style="{{item.img_style}}display:block;height: {{data.customFeature.imgHeight}};" mode="scaleToFill"></image>
+              <text class="title">{{item.title}}</text>
+            </view>
+          </block>
+        </block>
+      </scroll-view>
+    </view>
+    <view class="album-container background-ele clearfix" style="{{data.ul_style}}" wx:else>
+      <block wx:for="{{data.li}}" wx:key="">
+        <block wx:if="{{data.canIUseNavigatorTarget && item.customFeature.action == 'turn-to-xcx'}}">
+          <view class="{{item.li_class}}" style="{{item.li_style}}">
+            <navigator target="miniProgram" open-type="navigate" app-id="{{item.customFeature['xcx-appid']}}" path="{{item.customFeature['xcx-page-url'] || ''}}" version="release">
+              <image src="{{item.pic}}" style="{{item.img_style}}" mode="scaleToFill"></image>
+              <text class="title">{{item.title}}</text>
+            </navigator>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="{{item.li_class}}"
+              style="{{item.li_style}}"
+              data-event-params="{{item.eventParams}}"
+              catchtap="{{item.eventHandler}}">
+            <image src="{{item.pic}}" style="{{item.img_style}}" mode="scaleToFill"></image>
+            <text class="title">{{item.title}}</text>
+          </view>
+        </block>
+      </block>
+    </view>
+  </view>
+</template>
+
+<!-- 音频 -->
+<template name="zcAudio">
+  <view class="element audio">
+    <audio controls poster="{{ data.customFeature['background-thumb'] }}" name="{{ data.customFeature['file-name'] }}" src="{{data.customFeature['file-src']}}" author="{{ data.customFeature['audioAuthor'] }}" style="{{ data.style }}" bindanimationend="animationEnd" data-compid="{{ data.compId }}"></audio>
+  </view>
+</template>
+
+<!-- 视频 -->
+<template name="zcVideo">
+  <block wx:if="{{real_value}}">
+    <view class="element video" style="{{data.style}}" preload="auto" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <video id="videoele-{{data.compId}}" src="{{real_value.videoUrl}}" preload="auto" controls binderror="videoError" data-compid="{{data.compId}}" hidden="{{!data.videoPoster}}"></video>
+      <view class="videoele-cover-view" hidden="{{data.videoPoster}}">
+        <view class="videoele-poster-wrap">
+          <image class="videoele-poster" src="{{real_value.previewImageUrl}}" mode="scaleToFill" />
+        </view>
+        <view class="videoele-play-icon" data-compid="{{data.compId}}" bindtap="startPlayVideo">
+          <image class="videoele-play-image" src="http://cdn.jisuapp.cn/static/webapp/images/play.png" mode="scaleToFill" />
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:elif="{{data.customFeature.usage === 'xcx'}}">
+    <view class="element video" style="{{data.style}}">
+      <video src="{{data.customFeature.videoSourceUrl}}" controls preload="auto" binderror="videoError" data-compid="{{data.compId}}"></video>
+    </view>
+  </block>
+  <block wx:elif="{{data.customFeature.usage === 'videoProject'}}">
+    <view class="element video" style="{{data.style}}" wx:if="{{data.videoInfo.is_deleted != 1}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <video id="videoele-{{data.compId}}" src="{{data.videoInfo.video_url}}" controls preload="auto" binderror="videoError" bindplay="videoProjectPlay" bindpause="videoProjectPause" data-compid="{{data.compId}}" hidden="{{!data.videoPoster}}">
+      </video>
+      <view class="videoele-cover-view" hidden="{{data.videoPoster}}">
+        <view class="videoele-poster-wrap">
+          <image class="videoele-poster" src="{{data.videoInfo.preview_img}}" mode="scaleToFill" />
+        </view>
+        <view class="videoele-play-icon" data-compid="{{data.compId}}" bindtap="startPlayVideo">
+          <image class="videoele-play-image" src="http://cdn.jisuapp.cn/static/webapp/images/play.png" mode="scaleToFill" />
+        </view>
+      </view>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="element video" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <button catchtap="udpateVideoSrc" data-compid="{{data.compId}}">上传视频</button>
+    </view>
+  </block>
+</template>
+
+<!-- 视频列表 -->
+<template name="zcvideoList">
+  <scroll-view class="element video-list scroll-ele video-list-mode-{{data.customFeature.mode}}"
+                data-compid="{{data.compId}}"
+                style="{{data.style}}"
+                scroll-y="true"
+                scroll-x="false"
+                bindscrolltolower="videoScrollFunc"
+                bindanimationend="animationEnd">
+    <view class="js-list-container video-list-ul clearfix">
+      <block wx:if="{{data.customFeature.mode == 1}}">
+        <view class="video-list-item clearfix" wx:for="{{data.video_data}}" wx:key="" data-id="{{item.id}}" style="{{data.list_style}}" catchtap="turnToVideoDetail" >
+          <view class="video-list-inner">
+            <view class="list-img-outer" style="{{data.img_style}}">
+              <image class="list-img" src="{{item.preview_img}}" mode="scaleToFill"></image>
+              <view class="video-list-play icon-play ico-moon"></view>
+              <label class="rate" wx:if="{{!data.customFeature.hideRate}}">{{item.score}}</label>
+            </view>
+            <view class="title-container">
+              <view class="title">{{item.title}}</view>
+              <view class="play-count-outer" wx:if="{{!data.customFeature.hidePlayCount}}"><label class="video-eye ico-moon icon-eye"></label><label class="play-count">{{item.video_view}}</label></view>
+              <view class="price" wx:if="{{item.is_free == '0'}}"><label class="rmb">￥</label>{{item.price}}</view>
+              <view class="price" wx:else>免费</view>
+            </view>
+          </view>
+        </view>
+      </block>
+      <block wx:elif="{{data.customFeature.mode == 3}}">
+          <swiper indicator-dots="{{false}}" style="{{data.list_style}}" >
+            <block wx:for="{{data.video_data}}" wx:key="">
+              <swiper-item class="video-list-item" data-id="{{item.id}}" catchtap="turnToVideoDetail">
+                <view class="video-list-inner">
+                  <view class="list-img-outer" style="{{data.img_style}}">
+                    <image class="list-img" src="{{item.preview_img}}" mode="scaleToFill"></image>
+                    <view class="video-list-play icon-play ico-moon"></view>
+                    <label class="rate" wx:if="{{!data.customFeature.hideRate}}">{{item.score}}</label>
+                  </view>
+                  <view class="title-container" style="width:{{data.customFeature.mode == 0 ? data.title_width.width : 'auto'}};">
+                    <view class="title">{{item.title}}</view>
+                    <view class="price" wx:if="{{item.is_free == '0'}}"><label class="rmb">￥</label>{{item.price}}</view>
+                    <view class="price" wx:else>免费</view>
+                    <view class="play-count-outer" wx:if="{{!data.customFeature.hidePlayCount}}"><label class="video-eye ico-moon icon-eye"></label><label class="play-count">{{item.video_view}}</label>
+                    </view>
+                  </view>
+                </view>
+              </swiper-item>
+            </block>
+          </swiper>
+      </block>
+      <block wx:else>
+        <view class="video-list-item clearfix" wx:for="{{data.video_data}}" wx:key="" data-id="{{item.id}}" style="{{data.list_style}}" catchtap="turnToVideoDetail" >
+          <view class="video-list-inner">
+            <view class="list-img-outer">
+              <image class="list-img" src="{{item.preview_img}}" style="{{data.img_style}}" mode="scaleToFill"></image>
+              <view class="video-list-play icon-play ico-moon"></view>
+            </view>
+            <view class="title-container" style="width:{{data.customFeature.mode == 0 ? data.title_width.width : 'auto'}};">
+              <view class="title">{{item.title}}</view>
+              <view class="video-list-score">
+                <view class="video-score-wrap" wx:if="{{!data.customFeature.hideRate}}">
+                <view class="numeric"><label class="star ico-moon icon-score"></label><label class="star ico-moon icon-score"></label><label class="star ico-moon icon-score"></label><label class="star ico-moon icon-score"></label><label class="star ico-moon icon-score"></label></view>
+                <view class="numeric numeric-top" style="width:{{item.score * 10 + '%'}};"><label class="star full-star ico-moon icon-score"></label><label class="star full-star ico-moon icon-score"></label><label class="star full-star ico-moon icon-score"></label><label class="star full-star ico-moon icon-score"></label><label class="star full-star ico-moon icon-score"></label></view>
+                </view><label class="rate" wx:if="{{!data.customFeature.hideRate}}">{{item.score}}</label><label class="video-eye ico-moon icon-eye" wx:if="{{!data.customFeature.hidePlayCount}}"></label><label class="play-count" wx:if="{{!data.customFeature.hidePlayCount}}">{{item.video_view}}</label>
+              </view>
+              <view class="price" wx:if="{{item.is_free == '0'}}"><label class="rmb">￥</label>{{item.price}}</view>
+              <view class="price" wx:else>免费</view>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+    <view class="loading-btn" wx:if="{{data.customFeature.vesselAutoheight == 1 && data.customFeature.loadingMethod == 1 && data.customFeature.mode != 3}}" data-compid="{{data.compId}}" bindtap="videoScrollFunc">
+      <image wx:if="{{data.customFeature.loadingStyle == 'img'}}" mode="aspectFill" src="{{data.customFeature.loadingImg}}"></image>
+      <text wx:elif="{{data.customFeature.loadingStyle == 'text'}}" style="color: {{data.customFeature.loadingColor}};">{{data.customFeature.loadingText}}</text>
+    </view>
+  </scroll-view>
+</template>
+
+<!-- 城市定位 -->
+<template name="citylocation">
+  <view class="element citylocation" style="{{ data.style }}" data-id="{{data.compId}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class="citylocation-input" bindtap="selectLocal" data-id="{{data.compId}}}">
+        <text data-compid="{{data.compId}}">{{data.content}}:{{ data.district ? data.province+' '+data.city+' '+data.district : data.local }} </text>
+    </view>
+  </view>
+  <view class="citylocation-choose" hidden="{{!data.citylocationHidden}}" >
+    <view>
+      <view class="picker-btn"><text bindtap="cancelCity" data-id="{{data.compId}}">取消</text><text bindtap="submitCity" data-id="{{data.compId}}"
+      data-listid="{{data.customFeature.citylocation.customFeature.id}}"  data-listtype="{{data.customFeature.citylocation.type}}" data-form="{{data.customFeature.citylocation.customFeature.form}}">确定</text></view>
+      <picker-view indicator-style="height: 50px;" style="width: 100%; height: 300px;" value="{{data.value}}" bindchange="bindCityChange" data-id="{{data.compId}}">
+        <picker-view-column>
+          <view wx:for="{{data.provinces}}" wx:key="" style="line-height: 50px">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{data.citys}}" wx:key="" style="line-height: 50px">{{item}}</view>
+        </picker-view-column>
+        <picker-view-column>
+          <view wx:for="{{data.districts}}" wx:key="" style="line-height: 50px">{{item}}</view>
+        </picker-view-column>
+      </picker-view>
+    </view>
+  </view>
+</template>
+
+<!-- 横线 -->
+<template name="zcBreakline">
+  <view class="element breakline" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}"></view>
+</template>
+
+<!-- 公告 -->
+<template name="dqAnnounce">
+  <component-announce announce="{{data}}"></component-announce>
+</template>
+
+<!-- bbs -->
+<wxs module="bbsWxsModule">
+  var isArray = function(array) {
+    return array.join ? true : false;
+  }
+  module.exports.isArray = isArray;
+</wxs>
+<template name="zcBbs">
+  <view class="element bbs {{ data.customFeature.mode === 1 ? 'bbs-mode1' : '' }}" data-type="bbs" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view wx:if="{{ data.customFeature.mode !== 1 }}" class="comment-amount-p">
+      <text class="ca-span" ><text style="background-color: {{data.customFeature.themeColor}};"></text>全部评论</text>{{ content.count || 0 }}
+    </view>
+    <view class="comment-amount-p" wx:if="{{ data.customFeature.mode === 1 }}"><text class="ca-span" ><text style="background-color: {{data.customFeature.themeColor}};"></text>全部评论</text>{{ content.count || 0 }}</view>
+    <block wx:if="{{ content.count == 0 }}">
+      <view class="empty-tip">  
+        <view class="ico-moon icon-no-criticism"></view>
+        <view style='font-size: 24rpx'>暂无评论</view>
+      </view>
+    </block>
+    <block wx:else>
+      <scroll-view class="comment-container js-list-container" scroll-y="true">
+        <view class="comment" wx:for="{{ content.data }}" wx:key="">
+          <!-- <view> -->
+            <image class="cover-img" src="{{ item.form_data.cover_thumb }}"></image>
+            <view class="comment-content">
+              <view class="nickname-wrap">
+                <label class="nickname">{{ item.form_data.nickname }}</label>
+                <label><text class="comment-reference-text" wx:if="{{ item.form_data.content.reply }}">@{{ item.form_data.content.reply.nickname }}</text>{{ item.form_data.content.text }}</label>
+              </view>
+              <block wx:if="{{bbsWxsModule.isArray(item.form_data.content.img || '')}}">
+                <image wx:for="{{item.form_data.content.img}}" wx:for-index="idx" wx:for-item="subItem" wx:key="" class="comment-img" src="{{ subItem }}" mode="center" data-src="{{subItem}}" catchtap="previewImage"></image>
+              </block>
+              <block wx:else>
+                <image class="comment-img" wx:if="{{item.form_data.content.img}}" src="{{item.form_data.content.img}}" mode="center" data-src="{{item.form_data.content.img}}" catchtap="previewImage"></image>
+              </block>
+              <view><label class="add-time">{{ item.form_data.content.addTime }}</label><label wx:if="{{ data.customFeature.ifLike }}" class="bbs-content-btn ico-moon {{ item.has_count == 1 ? 'icon-collect-solid': 'icon-collect' }}" style="{{item.has_count == 1 ? 'color: #f00;' : ''}}" data-objrel="bbs_{{ item.form_data.id }}" data-counted="{{item.has_count}}" catchtap="changeCount" data-compid="{{ data.compId }}"data-parentcompid="{{ data.compId }}" data-index="{{ index }}">{{ item.count_num }}</label>
+              <label class="bbs-content-btn ico-moon icon-reply comment-reply-btn" catchtap="clickBbsReplyBtn" data-compid="{{ data.compId }}"data-index="{{ index }}"></label></view>
+            </view>
+        </view>
+        <view class="comment" style="text-align:center;font-size:22rpx;color:#999;padding:30rpx 16rpx 60rpx">没有更多咯~</view>
+      </scroll-view>
+    </block>
+    <view class="bbs-fix-btn" wx:if="{{!data.customFeature.mode}}">
+        <button class="ico-moon icon-bbs-comment" bindtap="showBbsReplyDialog" data-compid="{{data.compId}}">评论</button><text ></text><button open-type="share" class="ico-moon icon-bbs-share">分享</button>
+    </view>
+    <view class="bbs-fix-btn" wx:else>
+      <text style='display:inline-block;width:530rpx;border:1px solid #ddd;border-radius:4px;vertical-align:middle;margin:18rpx;height:calc(60rpx - 2px);text-indent: 10rpx;height: 60rpx;background-color:#fff;line-height: 60rpx;color: #666'  bindtap="showBbsReplyDialog" data-compid="{{data.compId}}">写评论...</text><button open-type="share" class="ico-moon icon-bbs-share" style="background-color:{{data.customFeature.themeColor}};color: #fff;width:138rpx;font-size:28rpx;padding:0 10rpx;border-radius:8rpx;margin:18rpx;height:60rpx;line-height:60rpx;float:right;">分享</button>
+    </view>
+    <view class="replyDialog" hidden="{{!data.isShowReplyDialog}}" data-compid="{{data.compId}}" bindtap="hideBbsReplyDialog">
+      <view catchtap="stopPropagation">
+        <view class="bbs-dialog-title">发评论 <text bindtap="hideBbsReplyDialog"  data-compid="{{data.compId}}"  style='float: right;font-size: 36rpx;' class='ico-moon icon-downarrow'></text> </view>
+        <view style="background-color:#efefef;margin: 10rpx 0;">
+          <textarea fixed="{{true}}" focus="{{data.bbsFocus}}" bindinput="bbsInputComment" value="{{ data.comment.text }}" data-compid="{{ data.compId }}"></textarea>
+          <view style="position:relative;width:140rpx;display:inline-block;margin-right: 20rpx;" hidden="{{ !data.comment.img }}" wx:for="{{data.comment.img}}" wx:key="">
+            <text class="delete-comment-img" catchtap="deleteCommentImage" data-index="{{index}}" data-compid="{{ data.compId }}"></text>
+            <image class="bbs-comment-img" src="{{ item }}" mode="center"></image>
+          </view>
+        </view>
+        <view><text class="ico-moon icon-pic selectBbsPic" bindtap="uploadBbsCommentImage" data-compid="{{ data.compId }}"></text><text class="bbs-publish-btn" catchtap="{{ data.replyIndex == undefined || data.replyIndex == 'undefined'  ? 'bbsPublishComment' : 'bbsPublishReply'}}" data-compid="{{ data.compId }}" style="{{ data.comment.text.length || data.comment.img ?  'background-color: #3091f2;': 'background-color: #ccc;' }}">发送</text></view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!-- 轮播 -->
+<template name="zcCarousel">
+  <swiper indicator-dots="true" circular="true" autoplay="{{data.customFeature.autoplay}}" vertical="{{data.customFeature.vertical}}" interval="{{data.customFeature.interval*1000}}" duration="750" indicator-color="{{ data.customFeature.indicatorColor }}" indicator-active-color="{{ data.customFeature.indicatorActiveColor }}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <block wx:for="{{data.content}}" wx:key="">
+      <block wx:if="{{data.canIUseNavigatorTarget && item.customFeature.action == 'turn-to-xcx'}}">
+        <swiper-item>
+          <navigator class="swiper-navigator" target="miniProgram" open-type="navigate" app-id="{{item.customFeature['xcx-appid']}}" path="{{item.customFeature['xcx-page-url'] || ''}}" version="release">
+            <image class="swiper-item" src="{{item.pic}}"/>
+            <view  wx:if="{{item.eventHandler == 'tapVideoPlayHandler'}}" class="carousel-video-play icon-play ico-moon"></view>
+          </navigator>
+        </swiper-item>
+      </block>
+      <block wx:else>
+          <swiper-item data-event-params="{{item.eventParams}}" catchtap="{{item.eventHandler}}">
+            <image class="swiper-item" src="{{item.pic}}"/>
+            <view  wx:if="{{item.eventHandler == 'tapVideoPlayHandler'}}" class="carousel-video-play icon-play ico-moon"></view>
+          </swiper-item>
+        </block>
+    </block>
+  </swiper>
+</template>
+<template name="carouselVideoPlay">
+  <view class="carouselVideoPlay" hidden="{{!data.videoUrl}}" catchtouchmove>
+    <view class="carouselVideoPlay-inner">
+      <view class="carouselVideoPlay-close icon-closes ico-moon" data-compid="{{data.compId}}" bindtouchend="carouselVideoClose" ></view>
+      <video wx:if="{{data.videoUrl}}" src="{{data.videoUrl}}" controls autoplay='autoplay'></video>
+    </view>
+  </view>
+</template>
+
+<!-- 分类 -->
+<template name="zcClassify">
+  <view class="element classify {{ 'classify-mode'+data.customFeature.mode }}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <scroll-view scroll-x="true" data-color="red" data-index="0" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}">
+      <block wx:for="{{data.content}}" wx:key="" wx:for-index="idx" wx:for-item="itemName">
+        <block wx:if="{{idx==data.customFeature.selected}}">
+          <block wx:if="{{data.customFeature.mode==1}}">
+            <view class="classify-item selected" data-event-params="{{itemName.eventParams}}" catchtap="{{itemName.eventHandler}}" style="color:{{data.customFeature.selectedColor}}"><text>{{itemName.text}}</text><i class="underline" style="border-color:{{data.customFeature.selectedColor}}"></i></view>
+          </block>
+          <block wx:else>
+            <view class="classify-item selected" data-event-params="{{itemName.eventParams}}" catchtap="{{itemName.eventHandler}}" style="color:{{data.customFeature.selectedColor}}"><text style="background-color:{{data.customFeature.selectedColor}}">{{itemName.text}}</text></view>
+          </block>
+        </block>
+        <block wx:else>
+          <view class="classify-item" data-event-params="{{itemName.eventParams}}" catchtap="{{itemName.eventHandler}}"><text>{{itemName.text}}</text></view>
+        </block>
+      </block>
+    </scroll-view>
+  </view>
+</template>
+
+<!-- 社区 -->
+<template name="zcCommunityList">
+  <view class="element community-list {{data.customFeature.mode == 1 ? (data.customFeature.style == 0 ? 'ncommunity-list-2-1' : 'ncommunity-list-2') : (data.customFeature.mode == 2 ? (data.customFeature.style == 0 ? 'ncommunity-list-3-1' : 'ncommunity-list-3') : '')}}"
+                style="{{data.style}}"
+                bindanimationend="animationEnd" 
+                data-compid="{{ data.compId }}">
+    <view class="js-list-container" data-list-index="0">
+      <view wx:for="{{data.community_data}}" wx:key="" class="{{data.customFeature.mode == 0 ? 'community-list-item-wrap' : 'ncommunity-item-wrap'}}">
+        <view wx:if="{{data.customFeature.mode == 0}}" class="community-list-item background-ele router js-to-detail" data-id="{{item.id}}" style="{{data.liStyle}}" catchtap="turnToCommunityPage">
+          <view class="inner-content">
+            <image class="list-img" src="{{item.img}}" style="{{data.imgStyle}}"></image>
+            <view class="title-container">
+              <view class="title">
+                <text class="community-title">{{item.name}}</text>
+                <text class="topic-num" style="{{data.secStyle}}">话题 {{item.xcx_article_count}}</text>
+              </view>
+              <view>
+                <view class="community-desc" style="{{data.secStyle}}">{{item.description}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+        <view wx:else class="ncommunity-item" data-id="{{item.id}}" style="{{data.liStyle}}" catchtap="turnToCommunityPage">
+          <view class="ncommunity-item-image"><image mode="aspectFill" src="{{item.img}}" alt="" style="{{data.imgStyle}}"></image><view wx:if="data.customFeature.style == 0" class="ncommunity-item-mask" style="{{data.maskStyle}}"></view></view>
+          <view class="ncommunity-item-text">
+            <view class="ncommunity-title">{{item.name}}</view>
+            <view class="ncommunity-count" style="{{data.secStyle}}"><text class="ncommunity-count-num">{{item.xcx_article_count}}</text>话题</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!-- 计数 -->
+<template name="zcCountEle">
+  <block wx:if="{{!!form}}">
+    <view class="element count-ele" style="{{data.style}}" data-form="{{form}}" data-objrel="{{form}}_{{data_id}}{{!!data.ifAutoCount? '_view': ''}}" data-index="{{index}}" catchtap="changeCount" data-counted="{{has_count}}" data-parentcompid="{{data.parentCompid}}" data-parenttype="{{parentType}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <label class="{{data.customFeature.showicon ? 'count-icon': ''}} {{data.customFeature.showicon ? data.icon : ''}}{{has_count == 1? '-active': ''}}" style="width: {{data.icon_size}}; height: {{data.icon_size}}"></label>
+      <label class="count-tip">{{data.content}}</label>
+      <label class="js-count-value">{{count_num}}</label>
+    </view>
+  </block>
+  <block wx:elif="{{!!data.ifAutoCount && !!page_form}}">
+    <view class="element count-ele" style="{{data.style}}" animation="{{data.animations}}" data-objrel="{{page_form}}_{{dataId}}_view" data-parentcompid="{{data.parentCompid}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <label class="{{data.customFeature.showicon ? 'count-icon': ''}} {{data.customFeature.showicon ? data.icon : ''}}{{data.count_data.has_count == 1? '-active': ''}}" style="width: {{data.icon_size}}; height: {{data.icon_size}}"></label>
+      <label class="count-tip">{{data.content}}</label>
+      <label class="js-count-value">{{data.count_data.count_num}}</label>
+    </view>
+  </block>
+  <block wx:elif="{{!data.ifAutoCount && !!page_form}}">
+    <view class="element count-ele" style="{{data.style}}" animation="{{data.animations}}" data-compid="{{data.compId}}" data-counted="{{data.count_data.has_count}}" data-objrel="{{page_form}}_{{dataId}}" catchtap="changeCount" data-parentcompid="{{data.parentCompid}}" bindanimationend="animationEnd">
+      <label class="{{data.customFeature.showicon ? 'count-icon': ''}} {{data.customFeature.showicon ? data.icon : ''}}{{data.count_data.has_count == 1? '-active': ''}}" style="width: {{data.icon_size}}; height: {{data.icon_size}}"></label>
+      <label class="count-tip">{{data.content}}</label>
+      <label class="js-count-value">{{data.count_data.count_num}}</label>
+    </view>
+  </block>
+  <block wx:elif="{{!!data.ifAutoCount}}">
+    <view class="element count-ele" style="{{data.style}}" animation="{{data.animations}}" data-objrel="{{data.objrel}}" data-parentcompid="{{data.parentCompid}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <label class="{{data.customFeature.showicon ? 'count-icon': ''}} {{data.customFeature.showicon ? data.icon : ''}}{{data.count_data.has_count == 1? '-active': ''}}" style="width: {{data.icon_size}}; height: {{data.icon_size}}"></label>
+      <label class="count-tip">{{data.content}}</label>
+      <label class="js-count-value">{{data.count_data.count_num}}</label>
+    </view>
+  </block>
+  <block wx:else>
+    <view class="element count-ele" style="{{data.style}}" animation="{{data.animations}}" data-compid="{{data.compId}}" data-counted="{{data.count_data.has_count}}" data-objrel="{{data.objrel}}" catchtap="changeCount" data-parentcompid="{{data.parentCompid}}" bindanimationend="animationEnd">
+      <label class="{{data.customFeature.showicon ? 'count-icon': ''}} {{data.customFeature.showicon ? data.icon : ''}}{{data.count_data.has_count == 1? '-active': ''}}" style="width: {{data.icon_size}}; height: {{data.icon_size}}"></label>
+      <label class="count-tip">{{data.content}}</label>
+      <label class="js-count-value">{{data.count_data.count_num}}</label>
+    </view>
+  </block>
+</template>
+
+
+<!-- 下拉选项 -->
+<template name="zcDropDownEle">
+  <view class="drop-down" style='{{data.style}}'>
+    <view style="{{'height:' + data.customFeature.titleStyle['line-height'] + ';color:' + data.customFeature.titleStyle.color + ';background-color:' + data.customFeature.titleStyle['background-color'] + ';font-size:' + data.customFeature.titleStyle['font-size'] + ';line-height:' + data.customFeature.titleStyle['line-height'] +';font-weight:' + data.customFeature.titleStyle['font-weight'] + ';font-style:' + data.customFeature.titleStyle['font-style'] + ';text-decoration:' + data.customFeature.titleStyle['text-decoration'] +';' }}">{{data.customFeature.name}}</view>
+    <block wx:for="{{data.customFeature.contents}}" wx:key="">
+      <picker data-form="{{data.formCompid}}" data-index="{{index}}" data-name="{{item.name}}" data-key="{{data.formCompid}}.form_data.{{data.customFeature.segment}}" data-filed="{{data.customFeature.segment}}" bindchange="changeDropDown" value="{{form_data[data.customFeature.segment][item.id].rangeV}}" range="{{item.options}}" data-range="{{item.options}}">
+        <view class="drop-down-picker-title" style="{{'height:' + data.customFeature.contentStyle['line-height'] + ';color:' + data.customFeature.contentStyle.color + ';background-color:' + data.customFeature.contentStyle['background-color'] + ';font-size:' + data.customFeature.contentStyle['font-size'] + ';line-height:' + data.customFeature.contentStyle['line-height'] +';font-weight:' + data.customFeature.contentStyle['font-weight'] + ';font-style:' + data.customFeature.contentStyle['font-style'] + ';text-decoration:' + data.customFeature.contentStyle['text-decoration'] +';' }}">{{form.dropDown[index] || item.name}}</view>
+      </picker>
+    </block>
+  </view>
+</template>
+
+<!-- 筛选组件 -->
+<wxs module="filterWxsModule">
+  var parseStyle = function(style) {
+    var styleArr1 = ["width", "height", "margin-top", "font-size"];
+    var styleArr2 = ["background-color", "font-style", "font-weight", "text-decoration", "opacity", "color"];
+    var s = '';
+    for (var i = 0; i < styleArr1.length; i++) {
+      var idx = styleArr1[i];
+      if(style[idx]){
+        s += idx + ':' + (parseInt(style[idx]) * 2.34375) + 'rpx;'
+        if(idx == "height"){
+          s += 'line-height:' + (parseInt(style[idx]) * 2.34375) + 'rpx;'
+        }
+      }
+    }
+    for (var i = 0; i < styleArr2.length; i++) {
+      var idx = styleArr2[i];
+      if(style[idx]){
+        s += idx + ':' + style[idx] + ';'
+      }
+    }
+    return s;
+  }
+  module.exports.parseStyle = parseStyle;
+</wxs>
+<template name="zcFilter">
+  <view class="element goodsFilter" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class="goodsFilter-search-wrap">
+      <view class="goodsFilter-search-inner" style="{{filterWxsModule.parseStyle(data.customFeature.searchStyle.style)}}" data-form="goods" bindtap="turnToSearchPage"><label class="ico-moon icon-search"></label>{{data.customFeature.placeholder}}</view>
+    </view>
+    <view class="goodsFilter-filter-tab-wrap" style="{{filterWxsModule.parseStyle(data.customFeature.sortStyle.style)}}">
+      <view class="goodsFilter-tab-item" style="color:{{data.tab == 0 ?  data.customFeature.selectedColor : ''}}" data-compid="{{data.compId}}" bindtap="sortByDefault">综合</view>
+      <view class="goodsFilter-tab-item" style="color:{{data.tab == 1 ?  data.customFeature.selectedColor : ''}}" data-compid="{{data.compId}}" bindtap="sortBySales">销量</view>
+      <view class="goodsFilter-tab-item goodsFilter-tab-price" style="color:{{data.tab == 2 ?  data.customFeature.selectedColor : ''}}" data-direction="{{data.direction}}" data-compid="{{data.compId}}" bindtap="sortByPrice">价格
+        <view class="goodsFilter-label">
+          <text class="goodsFilter-up ico-moon icon-filter-up" style="color:{{data.tab == 2 && data.sortDirection == 1 ?  data.customFeature.selectedColor : ''}}"></text>
+          <text class="goodsFilter-down ico-moon icon-filter-down" style="color:{{data.tab == 2 && data.sortDirection == 0 ?  data.customFeature.selectedColor : ''}}"></text>
+        </view>
+      </view>
+      <!-- <view class="goodsFilter-tab-item ico-moon {{ data.styleType == 1 ? 'icon-list-block' : 'icon-list-vertical'}}" data-compid="{{data.compId}}" bindtap="switchStyle"></view> -->
+      <view class="goodsFilter-tab-item goodsFilter-filter" style="color:{{data.hasFilter ?  data.customFeature.selectedColor : ''}}"data-compid="{{data.compId}}" bindtap="filterList">筛选
+        <text class="ico-moon icon-filter-f"></text>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!-- 表单提交按钮 -->
+<template name="zcFormButton">
+  <button class="button background-ele" style="{{data.style}}{{data.can_use == 1 ? '' : (data.customFeature.lineBackgroundImage?'background:'+ data.customFeature.lineBackgroundImage : 'background:'+ data.customFeature.lineBackgroundColor)}}" form-type="submit" disabled="{{data.can_use != 1}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    {{data.can_use == 1 ? data.content : data.customFeature.disabledContent || '已提交'}}
+  </button>
+</template>
+
+<!-- 表单单行输入框 -->
+<template name="zcInputEle">
+  <view class="element input-ele js-form-ele {{data.segment_required ? 'must' : ''}}" style="{{data.style}};{{ data.segment_required ? 'max-width:700rpx;':''}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <input type="text" placeholder="{{!!data.customFeature.placeholder? data.customFeature.placeholder: ''}}" data-segment="{{data.customFeature.segment}}" data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}" bindchange="inputChange" />
+  </view>
+</template>
+
+<!-- 表单评分 -->
+<template name="zcGradeEle">
+  <view class="element grade-ele js-form-ele {{data.segment_required ? 'must':''}}" style="{{data.style}}" data-segment="{{data.customFeature.segment}}" data-type="grade-ele" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class="grade-wrap">
+      <label class="ico-moon icon-{{data.customFeature.icon == 'love' ? 'heart' : (data.customFeature.icon == 'plum' ? 'clubs' : data.customFeature.icon)}}{{ data.editScore >= 1 ? '' : '-empty' }}"
+              data-compid="{{data.compId}}" data-segment="{{data.customFeature.segment}}" data-formcompid="{{data.formCompid}}"
+              data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}" data-score="1" bindtap="bindScoreChange"></label>
+      <label class="ico-moon icon-{{data.customFeature.icon == 'love' ? 'heart' : (data.customFeature.icon == 'plum' ? 'clubs' : data.customFeature.icon)}}{{ data.editScore >= 2 ? '' : '-empty' }}"
+              data-compid="{{data.compId}}" data-segment="{{data.customFeature.segment}}" data-formcompid="{{data.formCompid}}"
+              data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}" data-score="2" bindtap="bindScoreChange"></label>
+      <label class="ico-moon icon-{{data.customFeature.icon == 'love' ? 'heart' : (data.customFeature.icon == 'plum' ? 'clubs' : data.customFeature.icon)}}{{ data.editScore >= 3 ? '' : '-empty' }}"
+              data-compid="{{data.compId}}" data-segment="{{data.customFeature.segment}}" data-formcompid="{{data.formCompid}}"
+              data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}" data-score="3" bindtap="bindScoreChange"></label>
+      <label class="ico-moon icon-{{data.customFeature.icon == 'love' ? 'heart' : (data.customFeature.icon == 'plum' ? 'clubs' : data.customFeature.icon)}}{{ data.editScore >= 4 ? '' : '-empty' }}"
+              data-compid="{{data.compId}}" data-segment="{{data.customFeature.segment}}" data-formcompid="{{data.formCompid}}"
+              data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}" data-score="4" bindtap="bindScoreChange"></label>
+      <label class="ico-moon icon-{{data.customFeature.icon == 'love' ? 'heart' : (data.customFeature.icon == 'plum' ? 'clubs' : data.customFeature.icon)}}{{ data.editScore >= 5 ? '' : '-empty' }}"
+              data-compid="{{data.compId}}" data-segment="{{data.customFeature.segment}}" data-formcompid="{{data.formCompid}}"
+              data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}" data-score="5" bindtap="bindScoreChange"></label>
+    </view>
+  </view>
+</template>
+
+<!-- 表单选择 -->
+<template name="zcSelectEle">
+  <view class="element select-ele js-form-ele {{data.segment_required ? 'must':''}}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class="select-container">
+      <label class="title-container" style='{{data.titleStyle}}'><text class="title">{{data.content.title}}</text></label>
+      <checkbox-group class="checkbox-group" wx:if="{{data.customFeature.selectAmount > 1}}" bindchange="bindSelectChange"
+                      data-segment="{{data.customFeature.segment}}"
+                      data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}"
+                      data-limit="{{data.customFeature.selectAmount}}" data-compid="{{selectdata.compId}}">
+        <view class="select-item" wx:for="{{data.content.lists}}" wx:key="">
+          <label class="select-content checkbox"><label class="select-text">{{item}}</label>
+            <checkbox disabled="{{data.customFeature.selectAmount == selectdata.selectedData.itemLength && selectdata.selectedData[item] != 1}}" class="select-input" value="{{item}}"/>
+          </label>
+        </view>
+      </checkbox-group>
+      <radio-group class="radio-group" bindchange="bindSelectChange" wx:else
+                   data-segment="{{data.customFeature.segment}}"
+                   data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}">
+        <view class="select-item" wx:for="{{data.content.lists}}" wx:key="">
+          <label class="select-content checkbox"><label class="select-text">{{item}}</label>
+            <radio class="select-input" value="{{item}}"/>
+          </label>
+        </view>
+      </radio-group>
+    </view>
+  </view>
+</template>
+
+<!-- 表单多行文本 -->
+<template name="zcTextareaEle">
+  <view class="element textarea-ele js-form-ele {{data.segment_required ? 'must':''}}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <textarea placeholder="{{!!data.customFeature.placeholder ? data.customFeature.placeholder: ''}}"
+            data-segment="{{data.customFeature.segment}}"
+            data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}"
+            maxlength="-1"
+            bindinput="inputChange"/>
+  </view>
+</template>
+
+<!-- 表单选择时间 -->
+<template name="zcTimeEle">
+  <view class="element xcx-time-ele {{data.segment_required ? 'must':''}}" style="{{data.style}}; {{data.segment_required ? 'max-width:700rpx;':''}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <picker mode="date" bindchange="bindDateChange"
+            data-segment="{{data.customFeature.segment}}"
+            data-formcompid="{{data.formCompid}}"
+            data-compid="{{data.compId}}"
+            data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}" style="{{data.customFeature.ifAllDay?'width:100%':''}}">
+      <label class="date-btn">{{data.date? data.date: "请选择日期"}}</label>
+    </picker>
+    <picker wx:if="{{!data.customFeature.ifAllDay}}" mode="time" bindchange="bindTimeChange"
+            data-segment="{{data.customFeature.segment}}"
+            data-formcompid="{{data.formCompid}}"
+            data-compid="{{data.compId}}"
+            data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}">
+      <label class="time-btn">{{data.time? data.time: "请选择时间"}}</label>
+    </picker>
+  </view>
+</template>
+
+<!-- 图片上传 -->
+<template name="zcUploadImg">
+  <view class="element upload-img js-form-ele {{data.segment_required ? 'must':''}}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class="hasuploadImg" wx:for="{{data.content}}" wx:key="">
+      <view class="" style="position:relative;margin-left:15px;" >
+        <view class="deleteImg"  
+          data-index="{{index}}" 
+          data-compid="{{data.compId}}" 
+          data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}" 
+          bindtap="deleteUploadImg" 
+          data-formcompid="{{data.formCompid}}">-</view>
+        <image style="width:60px;height:60px;"  src="{{data.content[index]}}" mode="aspectFit"
+          catchtap="uploadFormImg"
+          data-compid="{{data.compId}}" data-formcompid="{{data.formCompid}}"
+          data-segment="{{data.customFeature.segment}}"
+          data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}"></image>
+      </view>
+      
+    </view>
+    <view class="plus-div"
+          catchtap="uploadFormImg"
+          data-compid="{{data.compId}}" data-formcompid="{{data.formCompid}}"
+          wx:if="{{  data.content.length < 9 }}"  
+          data-segment="{{data.customFeature.segment}}"
+          data-datakey="{{data.formCompid}}.form_data.{{data.customFeature.segment}}">
+      <text>＋</text>
+    </view>
+  </view>
+</template>
+
+<!-- 图片选项 -->
+<template name="zcPicOptions">
+  <view class="pic-options {{data.customFeature.mode === 0 ? 'mode-one': 'mode-two'}}" style="{{data.style}}">
+    <view style="{{'box-sizing:border-box;padding: 0 20rpx;text-align: '+data.customFeature.title_style['text-align']+';color:' + data.customFeature.title_style.color + ';background-color:' + data.customFeature.title_style['background-color'] + ';font-size:' + data.customFeature.title_style['font-size'] + ';line-height:' + data.customFeature.title_style['line-height'] +';font-weight:' + data.customFeature.title_style['font-weight'] + ';font-style:' + data.customFeature.title_style['font-style'] + ';text-decoration:' + data.customFeature.title_style['text-decoration'] +';' }}">{{data.customFeature.name}}</view>
+    <view class="pic-options-list" wx:for="{{data.customFeature.picOptions}}" wx:key="" data-index="{{index}}" data-filed="{{data.customFeature.segment}}" catchtap="selectPicOption" data-src="{{item.pic}}" data-form="{{data.formCompid}}" data-multi="{{data.customFeature.multiSelection}}" data-min="{{data.customFeature.minSelect}}" data-max="{{data.customFeature.maxSelect}}" data-id="{{data.customFeature.id}}" data-name="{{data.customFeature.name}}">
+      <view class="pic-options-item" style="{{'height:' + data.customFeature.pic_style.height + ';width:' + data.customFeature.pic_style.width + ';'}}">
+        <label wx:if="{{(!data.customFeature.multiSelection && form.picOptionsIndex[data.customFeature.id] === index) || (data.customFeature.multiSelection && form.picOptionsIndex[data.customFeature.id][index] === index)}}" style="background: -webkit-gradient(linear, right top, left bottom, from({{data.customFeature.pic_style['border-active-color']}}), color-stop(0.5, {{data.customFeature.pic_style['border-active-color']}}),color-stop(0.5, rgba(255, 0, 0,0)), to(rgba(255, 0, 0,0)));" class="icon-gou ico-moon"></label>
+        <image style="{{'box-sizing:border-box;height:' + data.customFeature.pic_style.height + ';width:' + data.customFeature.pic_style.width + ';border-color:' + ((!data.customFeature.multiSelection && form.picOptionsIndex[data.customFeature.id] === index) || (data.customFeature.multiSelection && form.picOptionsIndex[data.customFeature.id][index] === index) ? data.customFeature.pic_style['border-active-color'] : data.customFeature.pic_style['border-color']) + ';border-radius:' + data.customFeature.pic_style['border-radius'] + ';border-style:' + data.customFeature.pic_style['border-style'] +';border-width:' + data.customFeature.pic_style['border-width'] + ';' }}" src="{{item.pic}}"></image>
+        <text catchtap='tapPrevewPictureHandler' data-img="{{item.pic}}" data-imgarr="{{item.pic}}" class='ico-moon icon-big-pic'></text>
+      </view>
+      <view style="text-align: center;">{{item.name}}</view>
+    </view>
+  </view>
+</template>
+
+<!-- 多商家列表 -->
+<template name="zcFranchiseeList">
+  <view class="element franchisee-list" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class="franchisee-title">
+      <view class="franchisee-location" data-compid="{{data.compId}}" bindtap="tapFranchiseeLocation"><label class="ico-moon icon-fes_adress"></label> {{ data.location_address || '定位中...' }}</view>附近商家
+    </view>
+    <scroll-view class="scroll-ele"
+                  data-param="{{data.param}}"
+                  data-compid="{{data.compId}}"
+                  data-type="franchisee-list"
+                  scroll-y="true"
+                  data-curpage="{{data.curpage}}"
+                  bindscrolltolower="franchiseeScrollFunc">
+      <view class="js-list-container" data-list-index="0">
+        <view class="franchisee-list-item background-ele router js-to-detail {{data.customFeature.mode == 1? 'double-franchisee-list': ''}} {{item.open_status == 0 ? 'not-open':''}} "
+              wx:for="{{data.franchisee_data}}" wx:key="" data-appid="{{item.app_id}}" data-mode="{{item.mode_id}}" data-audit="{{item.is_audit}}" data-id="{{item.id}}" style="{{data.list_style}}" catchtap="turnToFranchiseeDetail">
+          <view class="franchisee-list-goods" style="height:{{data.customFeature.lineHeight}}px">
+          <view class="inner-content">
+            <text class="not-open-tip">休息中</text>
+            <!-- <view class="cart-goods-num" wx:if="{{ item.cart_goods_num && item.cart_goods_num != 0 }}">{{ item.cart_goods_num }}</view> -->
+            <image class="list-img" src="{{item.picture}}" style="{{data.img_style}}" mode="aspectFill"></image>
+            <view class="title-container" style="width: {{data.title_width.width}}">
+              <view class="title enter-title" wx:if="{{item.is_audit == 2}}">{{item.name}} <label class="franchisee-list-audit">待审核</label></view>
+              <view class="title" wx:else>{{item.name}}</view>
+              <view class="defaul">距你：{{ item.distance || 0 }}</view>
+              <view class="defaul">电话：{{item.phone}}</view>
+            </view>      
+          </view>
+          </view>
+          <view class="discount-coupons" wx:if="{{item.coupon_list}}">
+            <view class="coupons-cash" wx:if="{{item.coupon_list.best_subtract_value!=''}}">
+              <label>减</label>
+              进店领取{{item.coupon_list.best_subtract_value}}元优惠券
+            </view>
+            <view class="coupons-rebate" wx:if="{{item.coupon_list.best_discount!=''}}">
+              <label>折</label>
+              进店领取{{item.coupon_list.best_discount}}折优惠
+            </view>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</template>
+
+<!-- 商品列表 -->
+<wxs module="addshoppingcartImageModule">
+  var isImage = function(string) {
+    var a = string || 'addshoppingcart1';
+    return a.indexOf('addshoppingcart');
+  }
+  module.exports.isImage = isImage;
+</wxs>
+<template name="zcGoodsList">
+  <scroll-view class="element goods-list scroll-ele goods-list-mode-{{data.customFeature.mode}}"
+                data-param="{{data.param}}"
+                data-compid="{{data.compId}}"
+                data-type="goods-list"
+                style="{{data.style}}"
+                scroll-y="{{data.customFeature.mode == 2? false : true}}"
+                scroll-x="{{data.customFeature.mode == 2? true: false}}"
+                scroll-top="{{data.scrollTop}}"
+                data-curpage="{{data.curpage}}"
+                bindscrolltolower="goodsScrollFunc"
+                bindanimationend="animationEnd">
+    <view class="js-list-container" data-list-index="0" wx:if="{{data.customFeature.mode !== 3}}">
+      <view class="goods-list-item background-ele router js-to-detail"
+            wx:for="{{data.goods_data}}" wx:key="" data-id="{{item.form_data.id}}" style="{{data.list_style}}" data-contact="{{data.customFeature.ifUseContact}}" data-goods-type="{{item.form_data.goods_type}}" data-group="{{item.form_data.is_group_buy}}" data-hidestock="{{data.customFeature.isHideStock || ''}}" data-isShowVirtualPrice="{{data.customFeature.isShowVirtualPrice  || ''}}"
+            catchtap="turnToGoodsDetail"
+            >
+        <view class="inner-content">
+          <image class="list-img" src="{{item.form_data.cover}}" style="{{data.img_style}}position: relative;" mode="scaleToFill">
+              <image class="goods-subscript" wx:if="{{item.form_data.corner_mark > 0}}" src="{{item.form_data.corner_url}}"></image>
+          </image>
+          <view class="title-container" style="width: {{data.title_width.width}};">
+            <view class="title">{{item.form_data.title}}</view>
+            <block wx:if="{{data.customFeature.isShowVirtualPrice && data.customFeature.form == 'goods'}}">
+              <block wx:if="{{data.customFeature.mode == 0}}">
+                <view wx:if="{{!data.customFeature.isHideSales}}" style="width: {{data.title_width.width}};position:absolute;bottom: 0;padding-left: 10px;height:60%;">
+                  <view class="price" style="margin-bottom:10rpx;"><text style="font-size:28.125rpx;margin-right: 10rpx;" wx:if="{{item.form_data.goods_type != 1 && item.form_data.price != '0.00'}}">¥</text><text>{{(item.form_data.goods_type != '1' ? item.form_data.price : (item.form_data.price != '0.00' ? item.form_data.price : '免费'))}}</text><text class="virtual_price" wx:if="{{item.form_data.virtual_price != 0}}">¥{{item.form_data.virtual_price}}</text></view>
+                  <view style="bottom:0;"><text class="sales">销量：{{item.form_data.sales}}</text><label wx:if="{{item.form_data.is_group_buy != 1 &&data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) >= 0) && (data.customFeature.form == 'goods'||data.customFeature.form == 'tostore')}}" class="addShoppingcart ico-moon icon-{{data.customFeature.addShoppingCartImageSrc || 'addshoppingcart1'}}" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"></label><label wx:if="{{item.form_data.is_group_buy != 1 && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) < 0) && (data.customFeature.form == 'goods'||data.customFeature.form == 'tostore')}}" class="addShoppingcart shoppingImage" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"><image src="{{data.customFeature.addShoppingCartImageSrc}}"></image></label></view>
+                </view>
+                <view wx:if="{{data.customFeature.isHideSales}}" style="width: {{data.title_width.width}};padding-left: 10px;">
+                  <view class="price"><text style="font-size:28.125rpx;margin-right: 10rpx;" wx:if="{{item.form_data.goods_type != 1 && item.form_data.price != '0.00'}}">¥</text><text>{{(item.form_data.goods_type != '1' ? item.form_data.price : (item.form_data.price != '0.00' ? item.form_data.price : '免费'))}}</text><text class="virtual_price" wx:if="{{item.form_data.virtual_price != 0}}">¥{{item.form_data.virtual_price}}</text><label wx:if="{{item.form_data.is_group_buy != 1 && data.customFeature.form != 'appointment' && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) >= 0)}}" class="addShoppingcart ico-moon icon-{{data.customFeature.addShoppingCartImageSrc || 'addshoppingcart1'}}" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"></label><label wx:if="{{item.form_data.is_group_buy != 1 && data.customFeature.form != 'appointment' &&data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) < 0)}}" class="addShoppingcart shoppingImage" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"><image src="{{data.customFeature.addShoppingCartImageSrc}}"></image></label></view>
+                </view>
+              </block>
+              <block wx:else>
+                <view style="width: {{data.title_width.width}}">
+                  <view style="padding-left:0;"><text class="price">¥ {{item.form_data.price}}</text><text class="virtual_price" style="margin-left: 0;" wx:if="{{item.form_data.virtual_price != 0}}">¥{{item.form_data.virtual_price}}</text><label wx:if="{{data.customFeature.isShoppingCart && (data.customFeature.form == 'goods'||data.customFeature.form == 'tostore') && data.customFeature.isHideSales}}" class="addShoppingcart ico-moon icon-addshoppingcart" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"></label></view>
+                  <text wx:if="{{ !data.customFeature.isHideSales }}" class="sales">销量：{{item.form_data.sales}}</text>
+                  <label wx:if="{{item.form_data.is_group_buy != 1 && data.customFeature.form != 'appointment' && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) >= 0)}}" class="addShoppingcart ico-moon icon-{{data.customFeature.addShoppingCartImageSrc || 'addshoppingcart1'}}" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"></label>
+                  <label wx:if="{{item.form_data.is_group_buy != 1 && data.customFeature.form != 'appointment' && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) < 0)}}" class="addShoppingcart shoppingImage" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"><image src="{{data.customFeature.addShoppingCartImageSrc}}"></image></label>
+                </view>
+              </block>
+            </block>
+            <block wx:else>
+              <view style="width: {{data.title_width.width}}">
+                <text class="price">¥ {{item.form_data.price}}</text>
+                <text wx:if="{{ !data.customFeature.isHideSales }}" class="sales">销量：{{item.form_data.sales}}</text>
+                <label wx:if="{{item.form_data.is_group_buy != 1 && data.customFeature.form != 'appointment' && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) >= 0)}}" class="addShoppingcart ico-moon icon-{{data.customFeature.addShoppingCartImageSrc || 'addshoppingcart1'}}" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"></label>
+                <label wx:if="{{item.form_data.is_group_buy != 1 && data.customFeature.form != 'appointment' && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) < 0)}}" class="addShoppingcart shoppingImage" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"><image src="{{data.customFeature.addShoppingCartImageSrc}}"></image></label>
+              </view>
+            </block>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="js-list-container four-goods-list" data-list-index="0" wx:if="{{data.customFeature.mode === 3}}">
+      <view class="goods-list-item background-ele router js-to-detail"
+            wx:for="{{data.goods_data}}" wx:key="" data-id="{{item.form_data.id}}" style="{{data.list_style}}" data-contact="{{data.customFeature.ifUseContact}}" data-goods-type="{{item.form_data.goods_type}}" data-group="{{item.form_data.is_group_buy}}" data-hidestock="{{data.customFeature.isHideStock || ''}}" data-isShowVirtualPrice="{{data.customFeature.isShowVirtualPrice  || ''}}"
+            catchtap="turnToGoodsDetail">
+        <view style="position: relative;">
+          <image class="goods-subscript" wx:if="{{item.form_data.corner_mark > 0}}" src="{{item.form_data.corner_url}}"></image>
+          <image class="list-img" src="{{item.form_data.cover}}" style="{{data.img_style}}" mode="scaleToFill"></image>
+        </view>
+        <view class="four-goods-content">
+          <view class="title">{{item.form_data.title}}</view>
+          <view class="price-box">
+            <text class="real-price">¥ {{item.form_data.price}}</text>
+            <text class="virtual_price" wx:if="{{item.form_data.virtual_price != 0}}">¥{{item.form_data.virtual_price}}</text>
+            <label wx:if="{{data.customFeature.isHideSales && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) >= 0)}}" class="addShoppingcart ico-moon icon-{{data.customFeature.addShoppingCartImageSrc || 'addshoppingcart1'}}" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"></label>
+                <label wx:if="{{data.customFeature.isHideSales && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) < 0)}}" class="addShoppingcart shoppingImage" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"><image src="{{data.customFeature.addShoppingCartImageSrc}}"></image></label>
+          </view>
+          <view class="sales-box" wx:if="{{ !data.customFeature.isHideSales }}">
+            <text class="sales">销量：{{item.form_data.sales}}</text>
+            <label wx:if="{{item.form_data.is_group_buy != 1 && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) >= 0)}}" class="addShoppingcart ico-moon icon-{{data.customFeature.addShoppingCartImageSrc || 'addshoppingcart1'}}" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"></label>
+            <label wx:if="{{item.form_data.is_group_buy != 1 && data.customFeature.isShoppingCart && (addshoppingcartImageModule.isImage(data.customFeature.addShoppingCartImageSrc) < 0)}}" class="addShoppingcart shoppingImage" data-id="{{item.form_data.id}}" data-buynow="{{data.customFeature.isBuyNow || ''}}" catchtap="showAddShoppingcart"><image src="{{data.customFeature.addShoppingCartImageSrc}}"></image></label>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="loading-btn" wx:if="{{data.customFeature.vesselAutoheight == 1 && data.customFeature.loadingMethod == 1 && data.customFeature.mode != 2}}" data-compid="{{data.compId}}" bindtap="goodsScrollFunc">
+      <image wx:if="{{data.customFeature.loadingStyle == 'img'}}" mode="aspectFill" src="{{data.customFeature.loadingImg}}"></image>
+      <text wx:elif="{{data.customFeature.loadingStyle == 'text'}}" style="color: {{data.customFeature.loadingColor}};">{{data.customFeature.loadingText}}</text>
+    </view>
+  </scroll-view>
+</template>
+
+<!-- 热区 -->
+<template name="zcHotSpot">
+  <view class="element hotspot" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">{{data.content}}</view>
+</template>
+
+<!-- 列表 -->
+<template name="zcList">
+  <view class="element list" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <view class="list-container {{data.customFeature.sec_mode}}">
+        <block wx:for="{{data.content}}" wx:key="">
+          <block wx:if="{{data.canIUseNavigatorTarget && item.customFeature.action == 'turn-to-xcx'}}">
+            <view class="list-item background-ele" style="{{item.listStyle}}">
+              <navigator target="miniProgram" open-type="navigate" app-id="{{item.customFeature['xcx-appid']}}" path="{{item.customFeature['xcx-page-url'] || ''}}" version="release">
+                <image class="list-img" src="{{item.pic}}" style="{{item.imgStyle}}"></image>
+                <view class="title-container" style="{{item.titleWidth}}">
+                  <view class="title">{{item.title}}</view>
+                  <view class="sec-title" style="{{item.secTitleStyle}}">{{item.secTitle}}</view>
+                </view>
+              </navigator>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="list-item background-ele" style="{{item.listStyle}}" data-event-params="{{item.eventParams}}" catchtap="{{item.eventHandler}}">
+              <image class="list-img" src="{{item.pic}}" style="{{item.imgStyle}}"></image>
+              <view class="title-container" style="{{item.titleWidth}}">
+                <view class="title">{{item.title}}</view>
+                <view class="sec-title" style="{{item.secTitleStyle}}">{{item.secTitle}}</view>
+              </view>
+            </view>
+          </block>
+        </block>
+      </view>
+  </view>
+</template>
+
+<!-- 地图 -->
+<template name="zcMap">
+  <view class="element map" data-event-params="{{data.customFeature.markers_json_str}}" catchtap="tapMapDetail" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class="map-mask"></view>
+    <map class="map-module" hidden="{{data.customFeature.type != 'withmap' }}" longitude="{{data.customFeature.lng}}" latitude="{{data.customFeature.lat}}" markers="{{data.customFeature.markers}}" scale="17"></map>
+    <text class="icon-location ico-moon"></text><view class="map-link">{{data.content}}</view>
+  </view>
+</template>
+
+<!-- 资讯列表 -->
+<template name="zcNews">
+  <view class="news-wrap" style="{{data.conStyle}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class="newsIndex-tabs" wx:if="{{!data.isPartClassify}}" style="{{data.tabStyle}}">
+      <text wx:for="{{data.cateData}}" wx:for-item="cateItem" wx:for-index="cateIdx" wx:key="{{cateItem.name}}" data-id="{{cateItem.id}}"
+        data-articleType="{{cateItem.articleType}}" style="{{data.selectedCateId == cateItem.id ? data.selectedStyle : ''}}"
+        data-compid="{{cateItem.compid}}" catchtap="getNewsCateList">{{cateItem.name}}</text>
+    </view>
+    <view class="newsIndex-newsList" data-cateid="{{data.selectedCateId}}">
+      <view wx:for="{{data.newslist}}" wx:for-item="newsItem" wx:for-index="newsIdx" wx:key="{{newsIdx}}" class="news-item news-item-mode-{{newsItem.style}}"
+        data-router="newsDetail" data-id="{{newsItem.id}}" data-cateId="{{newsItem.category_id}}" data-isLiked="{{newsItem.is_liked}}"
+        data-recommend="{{newsItem.is_recommend}}" data-reward="{{newsItem.is_reward}}" catchtap="turnToNewsDetail">
+        <view class="news-img-groups" wx:if="{{newsItem.imgs[0] && newsItem.style == 4 && newsItem['article_type'] != 2}}">
+          <view wx:for="{{newsItem.imgs}}" wx:for-item="imgUrl" wx:for-index="imgIdx" wx:key="{{imgIdx}}" class="news-img">
+            <image src="{{userInfo.cover_thumb || imgUrl}}" mode="aspectFill" alt=""></image>
+            <view class="icon-wrap" wx:if="{{newsItem['form_data']['url']['video']['cover'] || newsItem['form_data']['video'][0]['video_url']}}">
+              <icon class="ico-moon icon-news-video-play"></icon>
+            </view>
+          </view>
+        </view>
+        <view class="news-text">
+          <view class="news-title">{{newsItem.title}}</view>
+          <view wx:if="{{newsItem.style == 0 || newsItem.style == 4 || newsItem.style == 5}}" class="news-text-bottom">
+            <text>{{newsItem.comment_count}}评论</text>
+            <text>{{newsItem.publish_time}}</text>
+            <text wx:for="{{newsItem.keywords}}" wx:for-item="word" wx:for-index="wordIdx" wx:key="{{wordIdx}}">#{{word}}</text>
+          </view>
+        </view>
+        <view class="news-img-groups" wx:if="{{newsItem.imgs[0] && newsItem.style != 4 && newsItem['article_type'] != 2}}">
+          <view wx:for="{{newsItem.imgs}}" wx:for-item="imgUrl" wx:for-index="imgIdx" wx:key="{{imgIdx}}" class="news-img">
+            <image src="{{imgUrl}}" mode="aspectFill" alt=""></image>
+            <view class="icon-wrap" wx:if="{{newsItem['form_data']['url']['video']['cover'] || newsItem['form_data']['video'][0]['video_url']}}">
+              <icon class="ico-moon icon-news-video-play"></icon>
+            </view>
+          </view>
+        </view>
+        <view class="news-link-groups" wx:elif="{{newsItem['article_type'] == 2}}">
+          <view class="news-article-groups" wx:if="{{newsItem.form_data.url.article}}">
+            <view class="img-wrap">
+              <image src="{{newsItem.form_data.url.article.cover}}"></image>
+            </view>
+            <view class="title-wrap">
+              {{newsItem.form_data.url.article.title}}
+            </view>
+          </view>
+          <view class="news-video-groups" wx:if="{{newsItem.form_data.url.video}}">
+            <image src="{{newsItem.form_data.url.video.cover}}"></image>
+            <view class="icon-wrap" wx:if="{{newsItem['form_data']['url']['video']['cover'] || newsItem['form_data']['video'][0]['video_url']}}">
+              <icon class="ico-moon icon-news-video-play"></icon>
+            </view>
+          </view>
+        </view>
+        <view wx:if="{{newsItem.style != 0 && newsItem.style != 4 && newsItem.style != 5}}" class="news-text-bottom">
+          <text>{{newsItem.comment_count}}评论</text>
+          <text>{{newsItem.publish_time}}</text>
+          <text wx:for="{{newsItem.keywords}}" wx:for-item="keyword" wx:for-index="keywordIdx" wx:key="{{keywordIdx}}">#{{keyword}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!-- 社区话题分类 -->
+<template name="zcTopicClassify">
+  <view class="element topic-classify-ele">
+    <view class="tcommunity-sectioncate-list sectioncate-list-mode-{{data.customFeature.mode}}" style="{{data.style}}">
+      <view class="tcommunity-sectioncate-list-ul">
+        <view wx:for="{{data.content}}" style="{{data.liStyle}}" wx:for-index="caIdx" wx:for-item="ca" wx:key="caIdx" class="tcommunity-sectioncate" data-compid="{{data.compId}}" data-topic-compid="{{data.relateTopicCompId}}" data-sectionid="{{ca.bindPlate}}" data-categoryid="{{ca.classifyId}}" catchtap="switchTopicCategory">
+          <image wx:if="{{data.customFeature.mode > 1}}" style="{{data.imgStyle}}" class="tcommunity-sectioncate-logo" src="{{ca.pic}}" alt="" mode="aspectFill"></image>
+          <view class="tcommunity-sectioncate-name" style="{{data.customFeature.mode > 1 ? ('width:' + data.customFeature.width + 'px') : ''}}"><text style="{{data.selectedSectionId == ca.bindPlate && data.selectedCategoryId == ca.classifyId ? 'color:' + data.customFeature.selectedColor : ''}}">{{ca.name}}</text><label style="color: {{data.customFeature.mode == 1 && data.selectedSectionId == ca.bindPlate && data.selectedCategoryId == ca.classifyId ? data.customFeature.selectedColor : 'transparent'}}"></label></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<!-- 社区话题排序 -->
+<template name="zcTopicSort">
+  <view class="element topic-sort-ele">
+    <view class="tcommunity-topic-category-list" style="{{data.style}}">
+      <span class="tcommunity-topic-category" style="color: {{data.currentOrderby == 'comment_count' ? data.customFeature.selectedColor : ''}}" data-orderby="comment_count" data-compid="{{data.compId}}" catchtap="switchTopiclistOrderBy">最热话题<label style="color: {{data.currentOrderby == 'comment_count' ? data.customFeature.selectedColor : 'transparent'}}"></label></span><span class="tcommunity-topic-category" style="color: {{data.currentOrderby == 'add_time' ? data.customFeature.selectedColor : ''}}" data-orderby="add_time" data-compid="{{data.compId}}" catchtap="switchTopiclistOrderBy">最新发表<label style="color: {{data.currentOrderby == 'add_time' ? data.customFeature.selectedColor : 'transparent'}}"></label></span><span class="tcommunity-topic-category" style="color: {{data.currentOrderby == 'distance' ? data.customFeature.selectedColor : ''}}" data-orderby="distance" data-compid="{{data.compId}}" catchtap="switchTopiclistOrderBy">距离最近<label style="color: {{data.currentOrderby == 'distance' ? data.customFeature.selectedColor : 'transparent'}}"></label></span><span class="tcommunity-topic-category" style="color: {{data.currentOrderby == 'last_comment_time' ? data.customFeature.selectedColor : ''}}" data-orderby="last_comment_time" data-compid="{{data.compId}}" catchtap="switchTopiclistOrderBy">最热回复<label style="color: {{data.currentOrderby == 'last_comment_time' ? data.customFeature.selectedColor : 'transparent'}}"></label></span>
+    </view>
+  </view>
+</template>
+
+<!-- 社区列表 -->
+<template name="zcTopic">
+  <scroll-view class="element topic-ele"
+               style="{{data.style}}"
+               data-compid="{{data.compId}}"
+               scroll-y="{{data.customFeature.vesselAutoheight == 0 ? true : false}}"
+               scroll-x="{{false}}"
+               bindscrolltolower="topicEleScrollFunc">
+    <view class="tcommunity-topic-list">
+      <view wx:for="{{data.topicList}}" wx:for-index="topIdx" wx:for-item="topic" wx:key="topic.id" class="tcommunity-topic tcommunity-topic-type-{{data.customFeature.mode}}" catchtap="turnToTopicDetail" data-index="{{topIdx}}" data-compid="{{data.compId}}" data-articlestyle="{{data.customFeature.mode}}">
+        <view wx:if="{{data.customFeature.mode == 1}}" class="tcommuinty-topic-top">
+          <view class="tcommunity-topic-author-logo"><image src="{{topic.headimgurl}}" alt=""></image></view>
+          <view class="tcommunity-topic-top-right">
+            <view class="tcommunity-topic-author-name">{{topic.nickname}}</view><span wx:if="{{topic.top_flag == 1}}" class="tcommunity-topic-stick"></span><span wx:if="{{topic.hot_flag == 1}}" class="tcommunity-topic-favorite"></span><span wx:if="{{topic.phone}}" class="contact-ta" data-compid="{{data.compId}}" data-phone="{{topic.phone}}" catchtap="showTopicPhoneModal"></span>
+            <view class="tcommunity-topic-title"><span catchtap="turnToCommunityPage" data-id="{{topic.section_id}}" class="tcommunity-topic-publish-where">#{{topic.section_name}}#</span>{{topic.title}}</view>
+          </view>
+        </view>
+        <view wx:else class="tcommuinty-topic-top">
+          <view class="tcommunity-topic-author-logo"><image src="{{topic.headimgurl}}" alt=""></image></view><view class="tcommunity-topic-author-name">{{topic.nickname}}</view><span wx:if="{{topic.top_flag == 1}}" class="tcommunity-topic-stick"></span><span wx:if="{{topic.hot_flag == 1}}" class="tcommunity-topic-favorite"></span><span wx:if="{{topic.phone}}" class="contact-ta" data-compid="{{data.compId}}" data-phone="{{topic.phone}}" catchtap="showTopicPhoneModal"></span>
+          <view class="tcommunity-topic-title">{{topic.title}}</view>
+        </view>
+        <view class="tcommunity-topic-des">{{topic.content.text || ''}}</view>
+        <view wx:if="{{topic.content.imgs && topic.content.imgs.length > 0}}" class="tcommunity-imgs-list" data-imgarr="{{topic.content.imgs}}" catchtap="tapPrevewPictureHandler">
+          <view wx:for="{{topic.content.imgs}}" wx:for-item="img" wx:for-index="imgIdx" wx:key="imgIdx" wx:if="{{imgIdx < 9}}">
+            <view wx:if="{{topic.content.imgs.length == 1}}" class="tcommunity-img-item-one"><image src="{{img}}" alt="" data-img="{{img}}" bindload="topicImgLoad" data-style="{{data.customFeature.mode}}" data-topic-id="{{topic.id}}" data-compid="{{data.compId}}" style="width:{{data.oneImgArr[topic.id].imgData.imgWidth}}rpx;height:{{data.oneImgArr[topic.id].imgData.imgHeight}}rpx;"></image></view>
+            <view wx:else class="tcommunity-img-item"><image src="{{img}}" mode="aspectFill" alt="" data-img="{{img}}"></image></view>
+          </view>
+        </view>
+        <view class="tcommunity-topic-publish-info">
+          <span class="tcommunity-topic-publish-date">{{topic.add_time}}</span><span class="tcommunity-topic-publish-address"><i wx:if="{{topic.address}}" class="ico-moon icon-community-location"></i>{{topic.address}}</span>
+          <span wx:if="{{data.customFeature.mode == 1}}" class="tcommunity-topic-viewcount"><i class="ico-moon icon-community-view_fill"></i><text>{{topic.read_count > 0 ? topic.read_count : '浏览'}}</text></span>
+          <view wx:if="{{data.customFeature.mode == 1}}" class="tcommunity-topic-comment" data-compid="{{data.compId}}" data-index="{{topIdx}}" catchtap="showTopicCommentBox">
+            <i class="ico-moon icon-community-friend"></i>
+            <view wx:if="{{topic.comment_box_show}}" class="tcommunity-topic-comment-box">
+              <span class="tcommunity-topic-comment-like" data-isliked="{{topic.is_liked}}" data-compid="{{data.compId}}" data-index="{{topIdx}}" catchtap="topicPerformLikeAct"><i class="ico-moon {{topic.is_liked == 1 ? 'icon-community_praise_fill' : 'icon-community_praise'}}"></i><text>{{topic.like_count > 0 ? topic.like_count : '点赞'}}</text></span><span class="tcommunity-topic-comment-rating" data-compid="{{data.compId}}" data-index="{{topIdx}}" catchtap="showTopicReplyComment"><i class="ico-moon icon-community_message"></i><text>{{topic.comment_count > 0 ? topic.comment_count : '评论'}}</text></span>
+            </view>
+          </view>
+          <span wx:else class="tcommunity-topic-publish-where" catchtap="turnToCommunityPage" data-id="{{topic.section_id}}">来自{{topic.section_name}}</span>
+        </view>
+        <view class="tcommunity-topic-bottom">
+          <view wx:if="{{data.customFeature.mode == 1 && topic.like_count > 0}}" class="tcommunity-topic-like-list"><i class="ico-moon icon-collect"></i><span class="logo-list"><image wx:for="{{topic.like}}" wx:for-index="imgIdx" wx:for-item="img" wx:key="imgIdx" src="{{img.headimgurl}}" alt=""></image></span><span class="tcommunity-topic-like-text">等{{topic.like_count}}人点赞</span></view>
+          <view wx:if="{{topic.comment_count > 0}}" class="tcommunity-topic-disscuss">
+            <view class="tcommmunity-topic-diss-ul">
+              <view wx:for="{{topic.comment}}" wx:for-index="coIdx" wx:for-item="co" wx:key="coIdx" class="tcommnuity-topic-diss-li">
+                <span class="tcommunity-topic-diss-name">{{co.nickname}}</span><text wx:if="{{co.content.reply_to}}">回复</text><span wx:if="{{co.content.reply_to}}" class="tcommunity-topic-diss-replyto">{{co.content.reply_to.nickname}}</span>：<span class="tcommunity-topic-diss-content">{{co.content.text}}</span>
+              </view>
+              <view class="tcommunity-topic-diss-all">查看全部<text class="tcommnity-topic-diss-count">{{topic.comment_count}}</text>条评论</view>
+            </view>
+          </view>
+        </view>
+        <view  wx:if="{{data.customFeature.mode == 0}}" class="tcommunity-topic-footer">
+          <span class="tcommunity-topic-share"><button data-id="{{topic.id}}" data-desc="{{topic.title}}" data-from="topicButton" open-type="share" catchtap="stopPropagation"><i class="ico-moon icon-community_share"></i><text>{{topic.spread_count > 0 ? topic.spread_count : '分享'}}</text></button></span><span class="tcommunity-topic-viewcount"><i class="ico-moon icon-community_view"></i><text>{{topic.read_count > 0 ? topic.read_count : '浏览'}}</text></span><span class="tcommunity-topic-rating" data-compid="{{data.compId}}" data-index="{{topIdx}}" catchtap="showTopicReplyComment"><i class="ico-moon icon-community_message"></i><text>{{topic.comment_count > 0 ? topic.comment_count : '评论'}}</text></span><span class="tcommunity-topic-voteup" data-isliked="{{topic.is_liked}}" data-compid="{{data.compId}}" data-index="{{topIdx}}" catchtap="topicPerformLikeAct"><i class="ico-moon {{topic.is_liked == 1 ? 'icon-community_praise_fill' : 'icon-community_praise'}}"></i><text>{{topic.like_count > 0 ? topic.like_count : '点赞'}}</text></span>
+        </view>
+      </view>
+    </view>
+    <view wx:if="{{data.topicList.length == 0}}" class="tcommunity-topic-none"><image src="http://cdn.jisuapp.cn/static/webapp/images/none.png" mode="aspectFill" alt=""></image><text>还没话题，快来说两句</text></view>
+    <view wx:if="{{data.customFeature.vesselAutoheight == 1 && data.customFeature.loadingMethod == 1 && data.listStatus.isMore}}" class="tcommunity-topic-loadmore" catchtap="topicEleScrollFunc" data-compid="{{data.compId}}"><image wx:if="{{data.customFeature.loadingStyle == 'img'}}" mode="aspectFill" src="{{data.customFeature.loadingImg}}"></image>
+    <text wx:elif="{{data.customFeature.loadingStyle == 'text'}}" style="color: {{data.customFeature.loadingColor}};">{{data.customFeature.loadingText}}</text></view>
+    <view wx:if="{{!data.listStatus.isMore && data.topicList.length > 0}}" class="tcommunity-topic-nomore"><text>没有更多了</text></view>
+  </scroll-view>
+  <view wx:if="{{data.topicSuspension.isShow}}" class="tcommunity-topic-btns-group"><view wx:if="{{data.topicSuspension.topBtnShow}}" class="tcommunity-topic-backtop-btn" data-compid="{{data.compId}}" catchtap="pageBackTopAct"><label class="ico-moon icon-community-go-top"></label></view><view class="tcommunity-topic-publish-btn" data-compid="{{data.compId}}" catchtap="turnToTopicPublish"><label class="ico-moon icon-community-edit"></label></view><view class="tcommunity-topic-service-btn"><label class="ico-moon icon-community-ai"></label><contact-button type="default-dark" size="20" session-from="goodsDetail"></contact-button></view></view>
+  <view class="actionSheet-wrap" wx:if="{{data.topicPhoneModal.isShow}}">
+    <view class="actionSheet-buttons">
+      <button class="phoneNum-btn">{{data.topicPhoneModal.phone}}</button>
+      <button class="call-btn" catchtap="topicMakePhoneCall" data-compid="{{data.compId}}">呼叫</button>
+      <button class="cancel-btn" data-phone="" catchtap="showTopicPhoneModal" data-compid="{{data.compId}}">取消</button>
+    </view>
+  </view>
+  <view class="tcommunity-topic-reply-wrap" wx:if="{{data.topicReplyComment.isShow}}">
+    <view class="tcommunity-topic-reply-box" style="{{data.topicReplyComment.focus ? 'bottom: 50%;transform: translateX(-50%) translateY(50%);' : 'bottom: 0;transform: translateX(-50%) translateY(0);'}}">
+      <view class="tcommunity-topic-reply-box-top"><text class="cancel-reply" data-compid="{{data.compId}}" catchtap="showTopicReplyComment" data-cancel="{{true}}">取消</text><text class="tcommunity-topic-publish-reply" data-compid="{{data.compId}}" catchtap="topicReplycommentSubmit" style="color:{{data.topicReplyComment.text ? '#3091f2' : '#999'}}">发表</text></view>
+      <view><textarea class="tcommunity-topic-reply-input" id="" placeholder="" maxlength="-1" value="{{data.topicReplyComment.text}}" data-compid="{{data.compId}}" bindinput="topicCommentReplyInput" bindblur="topicCommentReplyblur" bindfocus="topicCommentReplyfocus" placeholder-style="color: #999" focus="{{data.topicReplyComment.focus}}" show-confirm-bar="{{false}}" cursor="0" adjust-position="{{false}}"></textarea></view>
+    </view>
+  </view>
+</template>
+
+<!-- 搜索 -->
+<template name="zcSearch">
+  <view class="tcommunity-search" wx:if="{{data.customFeature.searchObject.type === 'topic'}}">
+    <label for="tcommunity-search-input" class="tcommunity-search-input-label">
+      <span class="ico-moon icon-search tcommunity-search-icon"></span><input class="tcommunity-search-input" type="text" name="tcommunity-search-input" data-compid="{{data.compId}}" data-topic-id="{{data.customFeature.searchObject.id}}" data-topic-compid="{{data.relateTopicCompId}}" catchblur="searchForTopicAct" bindinput="topicSearchInputAct" value="{{data.searchValue}}" placeholder="{{data.content.placeholder}}"/></label>
+    <label class="tcommunity-search-usercenter" catchtap="turnToTopicUserCenter"><image src="{{userInfo.cover_thumb}}" mode="aspectFill"></image></label>
+    <label class="ico-moon icon-community_notify tcommunity-search-notify" catchtap="turnToTopicNotify"><span class="tcommunity-search-notify-count" wx:if="{{false}}">12</span></label>
+  </view>
+  <view wx:else class="element search {{data.customFeature.ifLocation ? 'another-style' : ''}}" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <view class="ico-moon icon-location location" wx:if="{{data.customFeature.ifLocation}}" data-param="{{data.customFeature.ifLocation}}" catchtap="turnToSearchPage">全国</view>
+    <view class="search-input">
+       <icon size="14" type="search"></icon>
+       <view bindtap="turnToSearchPage" wx:if="{{data.customFeature.searchObject.type=='goods-list'}}" data-form="{{data.customFeature.searchObject.customFeature.form}}" class="fakeSearch" ></view>
+       <input data-compid="{{ data.compId }}" bindinput="bindSearchTextChange" bindconfirm="searchList" name="input" placeholder="{{data.content.placeholder}}" confirm-type="search" />
+       <view data-compid="{{ data.compId }}"
+             data-listid="{{data.customFeature.searchObject.customFeature.id}}"
+             data-listtype="{{data.customFeature.searchObject.type}}"
+             data-form="{{data.customFeature.searchObject.customFeature.form}}"
+            class="search-btn" bindtap="searchList">搜索</view>
+    </view>
+  </view>
+</template>
+
+<!-- 秒杀 -->
+<template name="zcSeckill">
+  <scroll-view class="element seckill scroll-ele goods-list-mode-{{data.customFeature.mode}}"
+               data-param="{{data.param}}"
+               data-compid="{{data.compId}}"
+               data-type="seckill-list"
+               style="{{data.style}}"
+               scroll-y="{{ data.customFeature.mode == 2 ? false : true }}"
+               scroll-x="{{ data.customFeature.mode == 2 ? true : false }}"
+               lower-threshold="10"
+               bindscrolltolower="seckillScrollFunc"
+               bindanimationend="animationEnd">
+    <view class="js-list-container">
+      <view class="goods-list-item background-ele "
+            wx:for="{{data.goods_data}}" wx:key="" data-id="{{item.form_data.id}}" style="{{data.list_style}}" data-contact="{{data.customFeature.ifUseContact}}" data-goods-type="{{item.form_data.goods_type}}"
+            catchtap="turnToSeckillDetail"
+            >
+        <view class="inner-content"><image class="list-img" src="{{item.form_data.cover}}" style="{{data.img_style}}" mode="aspectFit"></image><view class="title-container" style="width: {{data.title_width.width}};"><view class="title">{{item.form_data.title}}</view>
+          <view wx:if="{{data.customFeature.mode == 1 || data.customFeature.mode == 2}}" class="seckill-list-bottom {{item.form_data.seckill_start_state == 1 ? 'seckill-during' : ''}}{{item.form_data.seckill_start_state == 2 ? 'seckill-end' : ''}}">
+            <view>
+              <text class="price">￥{{item.form_data.seckill_price}}</text>
+              <text class="oldprice">￥{{item.form_data.price}}</text>
+            </view>
+            <view>
+              <view class="seckill-progress-wrap"><text>已售{{item.form_data.seckill_progress}}%</text><progress class="seckill-progress" percent="{{item.form_data.seckill_progress}}" stroke-width="6" activeColor="#fa6583" backgroundColor="#fff" /></view>
+              <view class="countdown">
+                <label wx:if="{{item.form_data.seckill_start_state == 0}}">距开始</label>
+                <label wx:elif="{{item.form_data.seckill_start_state == 1}}">距结束</label>
+                <label wx:elif="{{item.form_data.seckill_start_state == 2}}">已结束</label>
+                <text class="hours">{{item.form_data.downCount.hours}}</text>:<text class="minutes">{{item.form_data.downCount.minutes}}</text>:<text class="seconds">{{item.form_data.downCount.seconds}}</text>
+              </view>
+            </view>
+          </view>
+          <view wx:else class="seckill-list-bottom {{item.form_data.seckill_start_state == 1 ? 'seckill-during' : ''}}{{item.form_data.seckill_start_state == 2 ? 'seckill-end' : ''}}" style="width: {{data.title_width.width}}">
+            <view>
+              <text class="price">￥{{item.form_data.seckill_price}}</text>
+              <view class="countdown">
+                <label wx:if="{{item.form_data.seckill_start_state == 0}}">距开始</label>
+                <label wx:elif="{{item.form_data.seckill_start_state == 1}}">距结束</label>
+                <label wx:elif="{{item.form_data.seckill_start_state == 2}}">已结束</label>
+                <text class="hours">{{item.form_data.downCount.hours}}</text>:<text class="minutes">{{item.form_data.downCount.minutes}}</text>:<text class="seconds">{{item.form_data.downCount.seconds}}</text>
+              </view>
+            </view>
+            <view class="oldPrice-wrap">
+              <text class="oldprice">￥{{item.form_data.price}}</text>
+              <view class="seckill-progress-wrap"><text>已售{{item.form_data.seckill_progress}}%</text><progress class="seckill-progress" percent="{{item.form_data.seckill_progress}}" activeColor="#fa6583" backgroundColor="#fff" /></view>
+            </view>
+          </view>
+        </view></view>
+      </view>
+    </view>
+    <view class="loading-btn" wx:if="{{data.customFeature.vesselAutoheight == 1 && data.customFeature.loadingMethod == 1 && data.customFeature.mode != 2}}" data-compid="{{data.compId}}" bindtap="seckillScrollFunc">
+      <image wx:if="{{data.customFeature.loadingStyle == 'img'}}" mode="aspectFill" src="{{data.customFeature.loadingImg}}"></image>
+      <text wx:elif="{{data.customFeature.loadingStyle == 'text'}}" style="color: {{data.customFeature.loadingColor}};">{{data.customFeature.loadingText}}</text>
+    </view>
+  </scroll-view>
+</template>
+
+<!-- 新分类组件 -->
+<template name="zcNewClassify">
+  <view wx:if="{{ data.classifyLevel === 1 }}" class="element new-classify {{ 'new-classify-mode'+data.customFeature.mode }}"
+    style="{{ data.style }}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <scroll-view scroll-x="true">
+      <block wx:for="{{ data.classifyData }}" wx:key="">
+        <block wx:if="{{ item.category_id == data.selectedCateId }}">
+          <block wx:if="{{ data.customFeature.mode == 0 }}">
+            <view class="new-classify-item selected" style="color:{{ data.customFeature.selectedColor }}" catchtap="tapNewClassifyRefreshHandler"
+              data-category-id="{{ item.category_id }}" data-index="{{ index }}" data-compid="{{data.compId}}">
+              <text style="background-color:{{ data.customFeature.selectedColor }};">{{item.name}}</text>
+            </view>
+          </block>
+          <block wx:elif="{{ data.customFeature.mode == 1 }}">
+            <view class="new-classify-item selected" style="color:{{ data.customFeature.selectedColor }}" catchtap="tapNewClassifyRefreshHandler"
+                data-category-id="{{ item.category_id }}" data-index="{{ index }}" data-compid="{{data.compId}}">
+              <text>{{item.name}}</text>
+              <i class="underline" style="border-color:{{ data.customFeature.selectedColor }}"></i>
+            </view>
+          </block>
+        </block>
+        <block wx:else>
+          <view class="new-classify-item" catchtap="tapNewClassifyRefreshHandler" data-index="{{ index }}" data-category-id="{{ item.category_id }}"
+            data-compid="{{data.compId}}">
+            <text>{{ item.name }}</text>
+          </view>
+        </block>
+      </block>
+    </scroll-view>
+  </view>
+  <view wx:if="{{ data.classifyLevel === 2 }}" class="element new-classify classify-level-2 {{ 'new-classify-mode'+data.customFeature.mode }}"
+    style="{{ data.style }}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <scroll-view scroll-x="true">
+      <block wx:for="{{ data.classifyData }}" wx:key="">
+        <block wx:if="{{ item.category_id == '' }}">
+          <view class="new-classify-item {{ index == data.selectedIndex ? 'selected':'' }}" style="color:{{ index == data.selectedIndex ? data.customFeature.selectedColor : '' }}"
+            catchtap="tapNewClassifyRefreshHandler" data-category-id="{{ item.category_id }}" data-index="{{ index }}" data-compid="{{data.compId}}">
+            <text>全部</text>
+            <i wx:if="{{ index != data.classifyData.length - 1 }}" class="divide-line"></i>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="new-classify-item {{ index == data.selectedIndex ? 'selected':'' }}" style="color:{{ index == data.selectedIndex ? data.customFeature.selectedColor : '' }}"
+            catchtap="tapNewClassifyShowSubClassify" data-category-id="{{ item.category_id }}" data-index="{{ index }}" data-compid="{{data.compId}}">
+            <text>{{ item.name }}</text>
+            <i class="triangle" style="border-top-color:{{ index == data.selectedIndex ? data.customFeature.selectedColor : '' }}"></i>
+            <i wx:if="{{ index != data.classifyData.length - 1 }}" class="divide-line"></i>
+          </view>
+        </block>
+      </block>
+    </scroll-view>
+    <scroll-view class="new-classify-subclassify" hidden="{{ !data.showSubClassify }}" scroll-y="true" 
+      style="background-image:{{ data.customFeature['background-image'] }}; background-color:{{ data.customFeature['background-color'] }}; opacity:{{ data.customFeature['opacity'] }}; font-size:{{ data.customFeature['font-size'] }}; font-weight:{{ data.customFeature['font-weight'] }}; font-style:{{ data.customFeature['font-style'] }}; text-decoration:{{ data.customFeature['text-decoration'] }}; color:{{ data.customFeature['color'] }};">
+      <block wx:for="{{ data.classifyData }}" wx:key="">
+        <view class="sub-classify-item-list" hidden="{{ index !== data.selectedIndex }}">
+          <view class="sub-classify-item {{ item.category_id === data.selectedCateId ? 'selected':''}}" catchtap="tapNewClassifyRefreshHandler"
+            data-category-id="{{ item.category_id }}" data-compid="{{data.compId}}" 
+            style="color:{{ item.category_id === data.selectedCateId ? data.customFeature.selectedColor : '' }}; border-color:{{ item.category_id === data.selectedCateId && data.customFeature.mode == 1 ? data.customFeature.selectedColor : '' }};">
+            <text style="background-color:{{ item.category_id === data.selectedCateId && data.customFeature.mode == 0 ? data.customFeature.selectedColor : '' }}">全部</text>
+          </view>
+          <block wx:for="{{ item.subclass }}" wx:key="" wx:for-index="subIndex" wx:for-item="subItem">
+            <view class="sub-classify-item {{ subItem.category_id == data.selectedCateId ? 'selected': ''}}" catchtap="tapNewClassifyRefreshHandler"
+                  data-category-id="{{ subItem.category_id }}" data-compid="{{data.compId}}" 
+                  style="color:{{ subItem.category_id === data.selectedCateId ? data.customFeature.selectedColor : '' }}; border-color:{{ subItem.category_id === data.selectedCateId && data.customFeature.mode == 1 ? data.customFeature.selectedColor : '' }}">
+              <text style="background-color:{{ subItem.category_id === data.selectedCateId && data.customFeature.mode == 0 ? data.customFeature.selectedColor : '' }}">{{ subItem.name }}</text>
+            </view>
+          </block>
+        </view>
+      </block>
+    </scroll-view>
+  </view>
+</template>
+
+<!-- 排序组件 -->
+<template name="zcSort">
+  <view class="element sort" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+    <scroll-view scroll-x="true" data-selected="{{data.customFeature.selected}}" style="{{data.ul_style}}">
+      <block wx:for="{{data.content}}" wx:for-index="idx" wx:for-item="itemName" wx:key="">
+        <block wx:if="{{idx == data.customFeature.selected}}">
+          <view class="item refresh selected" catchtap="sortListFunc"
+                data-compid="{{ data.compId }}"
+                data-listid="{{data.customFeature.sort_object}}"
+                data-sortkey="{{itemName.customFeature.sort_key}}"
+                data-sortdirection="{{itemName.customFeature.sort_direction}}"
+                data-idx="{{idx}}"
+                style="color:{{data.customFeature.selectedColor}}">
+            <text>{{itemName.text}}</text>
+            <label class="arr-wrap" wx:if="{{ idx != 0 }}">
+              <text style="color: {{itemName.customFeature.sort_direction == 0 ? data.customFeature.selectedColor : '#ddd'}};" class="sort-arr arr-up">▲</text>
+              <text style="color: {{itemName.customFeature.sort_direction == 1 ? data.customFeature.selectedColor : '#ddd'}};" class="sort-arr arr-down">▼</text>
+            </label>
+          </view>
+        </block>
+        <block wx:else>
+          <view class="item refresh" catchtap="sortListFunc"
+                data-compid="{{ data.compId }}"
+                data-listid="{{data.customFeature.sort_object}}"
+                data-sortkey="{{itemName.customFeature.sort_key}}"
+                data-sortdirection="{{itemName.customFeature.sort_direction}}"
+                data-idx="{{idx}}"
+          >{{itemName.text}}</view>
+        </block>
+      </block>
+    </scroll-view>
+  </view>
+</template>
+
+<!-- 悬浮窗 -->
+<template name="zcSuspension">
+  <view class="element suspension {{data.customFeature.mode == 1 ? 'suspension-sideways' : ''}}"
+               style="{{data.style}}bottom: {{data.suspension_bottom}}rpx;" 
+               bindanimationend="animationEnd"
+               data-compid="{{ data.compId }}">
+    <block wx:for="{{data.content}}" wx:key= "">
+      <block wx:if="{{item.customFeature.action == 'contact'}}">
+        <view class="">
+          <view  class="suspension-item diy" style="{{data.list_style}}width:{{data.customFeature.width}};height:{{data.customFeature.height}};{{data.customFeature.lineBackgroundImage?'background:'+ data.customFeature.lineBackgroundImage:''}}">
+            <button open-type="contact" session-from="suspension"></button>
+            <image style="width:{{data.customFeature.width || '100%'}};height:{{data.customFeature.height || '100%'}}" src="{{item.pic}}"></image>
+          </view>
+        </view>
+      </block>
+      <block wx:elif="{{data.canIUseNavigatorTarget && item.customFeature.action == 'turn-to-xcx'}}">
+        <view class="">
+          <view  class="suspension-item diy" style="{{data.list_style}}width:{{data.customFeature.width}};height:{{data.customFeature.height}};{{data.customFeature.lineBackgroundImage?'background:'+ data.customFeature.lineBackgroundImage:''}}">
+            <navigator target="miniProgram" open-type="navigate" app-id="{{item.customFeature['xcx-appid']}}" path="{{item.customFeature['xcx-page-url'] || ''}}" version="release">
+              <image style="width:{{data.customFeature.width || '100%'}};height:{{data.customFeature.height || '100%'}}" src="{{item.pic}}"></image>
+            </navigator>
+          </view>
+        </view>
+      </block>
+      <block wx:else>
+        <view class="" data-event-params="{{item.eventParams}}" catchtap="{{item.eventHandler}}">
+          <view class="suspension-item diy" style="{{data.list_style}}width:{{data.customFeature.width}};height:{{data.customFeature.height}};{{data.customFeature.lineBackgroundImage?'background:'+ data.customFeature.lineBackgroundImage:''}}">
+            <image class="old-and-new" style="width:{{data.customFeature.width || '100%'}};height:{{data.customFeature.height || '100%'}}" src="{{item.pic}}"></image>
+          </view>
+        </view>
+      </block>
+    </block>
+    <view class="old-suspension" wx:if="{{data.customFeature.appendComponent}}">
+      <view class="suspension-item" data-type="service" wx:if="{{data.customFeature.appendComponent.service}}" style="{{data.list_style}}">
+        <icon class="ico-moon icon-service2 suspension-service">
+          <button open-type="contact" session-from="suspension"></button>
+        </icon>
+      </view>
+      <view class="suspension-item" data-router="myOrder" wx:if="{{data.customFeature.appendComponent.myOrder}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
+        <icon class="ico-moon icon-notebook"></icon>
+      </view>
+      <view class="suspension-item" data-router="shoppingCart" wx:if="{{data.customFeature.appendComponent.shoppingCart}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
+        <icon class="ico-moon icon-shoppingcart"></icon>
+      </view>
+      <view class="suspension-item" data-type="top" wx:if="{{data.customFeature.appendComponent.top}}" catchtap="scrollPageTop" style="{{data.list_style}}">
+        <icon class="ico-moon icon-top"></icon>
+      </view>
+    </view>
+  </view>
+</template>
+
+

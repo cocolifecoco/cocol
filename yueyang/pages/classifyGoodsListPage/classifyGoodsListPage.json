@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "component-filter": "/components/filter/filter",
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+    }
+}

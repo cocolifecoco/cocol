@@ -1,0 +1,42 @@
+<view class="getUserInfo" wx:if="{{showGetUserInfo}}">
+  <view class="getUserInfo-bg"></view>
+  <view class="getUserInfo-inner">
+    <view class="getUserInfo-title">提示</view>
+    <view class="getUserInfo-view">
+      <image class="getUserInfo-logo" src="{{appLogo}}" mode="aspectFill"></image>
+      <view class="getUserInfo-tip">是否登录并继续使用该程序</view>
+    </view>
+    <view class="getUserInfo-desc"><label class="getUserInfo-circle"></label>登录程序需进行微信授权</view>
+    <view class="getUserInfo-btn-wrap">
+      <view class="getUserInfo-btn" bindtap="refuseGetInfo">拒绝</view>
+      <button class="getUserInfo-btn getUserInfo-confirm" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">去登录</button>
+    </view>
+  </view>
+</view>
+<view class="getUserInfo" wx:if="{{showSettingTip}}">
+  <view class="getUserInfo-bg"></view>
+  <view class="getUserInfo-inner">
+    <view class="getUserInfo-title">信息授权提示</view>
+    <view class="getUserInfo-setting-tip">需要获取您的公开信息（昵称、头像等），请到小程序的设置中打开用户信息授权</view>
+    <view class="getUserInfo-btn-wrap">
+      <view class="getUserInfo-btn" bindtap="cancelSetting">取消</view>
+      <button wx:if="{{canIUseButtonOpenSetting}}" class="getUserInfo-btn getUserInfo-confirm" open-type="openSetting" bindopensetting="buttonOpenSetting">去设置</button>
+      <view wx:else class="getUserInfo-btn getUserInfo-confirm" bindtap="openSetting">去设置</view>
+    </view>
+  </view>
+</view>
+<view class="getUserInfo" wx:if="{{showNoLoginTip}}">
+  <view class="getUserInfo-bg"></view>
+  <view class="getUserInfo-inner">
+    <view class="getUserInfo-title">提示</view>
+    <view class="getUserInfo-view">
+      <icon class="getUserInfo-tip-icon" type="warn" size="30" color="red"/>
+      <view class="getUserInfo-tip">尚未登录，将无法正常使用该程序</view>
+    </view>
+    <view class="getUserInfo-desc"><label class="getUserInfo-circle"></label>登录程序需进行微信授权</view>
+    <view class="getUserInfo-btn-wrap">
+      <view class="getUserInfo-btn" bindtap="refuseLogin">拒绝</view>
+      <button class="getUserInfo-btn getUserInfo-confirm" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">立即登录</button>
+    </view>
+  </view>
+</view>

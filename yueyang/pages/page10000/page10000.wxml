@@ -1,0 +1,413 @@
+<import src="../../components/templates/templates.wxml"/>
+<view class="app" hidden="{{page_hidden}}">
+<web-view wx-if="{{false}}" src="{{false}}"></web-view>
+<component-share pageQRCodeData="{{pageQRCodeData}}"></component-share>
+<component-backhome backToHomePage="{{backToHomePage}}"></component-backhome>
+<component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
+<component-shop-vip shopVipModal="{{shopVipModal}}"></component-shop-vip>
+<component-getUserInfo showGetUserInfo="{{showGetUserInfo}}"></component-getUserInfo>
+<component-filter filterShow="{{filterShow}}" chooseCateId="{{categoryId}}" form="{{classifyGroupForm}}" bind:confirm="filterConfirm"></component-filter>
+<component-formPay formInfo="{{formInfo}}"></component-formPay>
+<view class="ele-container" wx:if="{{!title_ele1.hidden}}">
+  <template is="zcTitle" data="{{data:title_ele1, detail_data: detail_data}}"></template>
+</view>
+<view class="ele-container">
+  <block wx:if="{{ detail_data && detail_data }}">
+    <template is="zcCarousel" data="{{data:carousel2, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcCarousel" data="{{data:carousel2}}"></template>
+  </block>
+</view>
+<template is="carouselVideoPlay" data="{{data:carousel2}}"></template>
+<view class="ele-container" wx:if="{{!search3.hidden}}">
+  <template is="zcSearch" data="{{data:search3, userInfo}}"></template>
+</view><view class="ele-container" wx:if="{{!classify4.hidden}}">
+  <template is="zcClassify" data="{{data:classify4}}"></template>
+</view><template name="zcLayoutVessel5">
+  <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+    <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+      <view class="element layout-vessel clearfix" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+        <template is="zcSubLayoutVessel5" data="{{data:data, real_value:real_value, detail_data: detail_data}}"></template>
+      </view>
+    </navigator>
+  </block>
+  <block wx:else>
+    <view class="element layout-vessel clearfix" style="{{data.style}}" data-event-params="{{data.eventParams}}"
+          catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <template is="zcSubLayoutVessel5" data="{{data:data, real_value:real_value, detail_data: detail_data}}"></template>
+    </view>
+  </block>
+</template>
+<template name="zcSubLayoutVessel5">
+  <view class="cell" style="{{data.cell_style_1}}">
+  <view class="ele-container" wx:if="{{!data.content.leftEles[0].hidden}}">
+  <block wx:if="{{data.content.leftEles[0].customFeature.segment == 'default_map' && real_value}}">
+  <!-- 在动态列表中的双栏中绑定地图 -->
+    <template is="zcText" data="{{data:data.content.leftEles[0],  form_data: real_value.form_data}}"></template>
+  </block>
+  <block wx:elif="{{data.content.leftEles[0].customFeature.segment == 'default_map'}}">
+  <!-- 动态列表,动态容器 与详情页绑定地图 -->
+    <template is="zcText" data="{{data:data.content.leftEles[0], form_data: item.form_data, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{real_value}}">
+    <template is="zcText" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcText" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcText" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcText" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+<view class="ele-container" wx:if="{{!data.content.leftEles[1].hidden}}">
+  <block wx:if="{{data.content.leftEles[1].customFeature.segment == 'default_map' && real_value}}">
+  <!-- 在动态列表中的双栏中绑定地图 -->
+    <template is="zcText" data="{{data:data.content.leftEles[1],  form_data: real_value.form_data}}"></template>
+  </block>
+  <block wx:elif="{{data.content.leftEles[1].customFeature.segment == 'default_map'}}">
+  <!-- 动态列表,动态容器 与详情页绑定地图 -->
+    <template is="zcText" data="{{data:data.content.leftEles[1], form_data: item.form_data, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{real_value}}">
+    <template is="zcText" data="{{data:data.content.leftEles[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcText" data="{{data:data.content.leftEles[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcText" data="{{data:data.content.leftEles[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcText" data="{{data:data.content.leftEles[1], detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+
+</view>
+<view class="cell border-cell" style="{{data.cell_style_2}}">
+  <view class="ele-container" wx:if="{{!data.content.rightEles[0].hidden}}">
+  <block wx:if="{{real_value}}">
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+</view>
+</view>
+
+</template>
+<view class="ele-container" wx:if="{{!layout_vessel5.hidden}}">
+  <block wx:if="{{real_value}}">
+    <template is="zcLayoutVessel5" data="{{data:layout_vessel5, real_value:real_value, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcLayoutVessel5" data="{{data:layout_vessel5, real_value:item, detail_data: detail_data}}"></template>
+  </block>
+</view>
+<template name="zcStaticVessel6">
+  <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+    <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+      <view class="element static-vessel" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+        <template is="zcSubStaticVessel6" data="{{data:data, detail_data: detail_data}}"></template>
+      </view>
+    </navigator>
+  </block>
+  <block wx:else>
+    <view class="element static-vessel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <template is="zcSubStaticVessel6" data="{{data:data, detail_data: detail_data}}"></template>
+    </view>
+  </block>
+</template>
+<template name="zcSubStaticVessel6">
+  <template name="zcLayoutVessel6_0_2_3">
+  <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+    <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+      <view class="element layout-vessel clearfix" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+        <template is="zcSubLayoutVessel6_0_2_3" data="{{data:data, real_value:real_value, detail_data: detail_data}}"></template>
+      </view>
+    </navigator>
+  </block>
+  <block wx:else>
+    <view class="element layout-vessel clearfix" style="{{data.style}}" data-event-params="{{data.eventParams}}"
+          catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <template is="zcSubLayoutVessel6_0_2_3" data="{{data:data, real_value:real_value, detail_data: detail_data}}"></template>
+    </view>
+  </block>
+</template>
+<template name="zcSubLayoutVessel6_0_2_3">
+  <view class="cell" style="{{data.cell_style_1}}">
+  <view class="ele-container" wx:if="{{!data.content.leftEles[0].hidden}}">
+  <block wx:if="{{data.content.leftEles[0].customFeature.segment == 'default_map' && real_value}}">
+  <!-- 在动态列表中的双栏中绑定地图 -->
+    <template is="zcText" data="{{data:data.content.leftEles[0],  form_data: real_value.form_data}}"></template>
+  </block>
+  <block wx:elif="{{data.content.leftEles[0].customFeature.segment == 'default_map'}}">
+  <!-- 动态列表,动态容器 与详情页绑定地图 -->
+    <template is="zcText" data="{{data:data.content.leftEles[0], form_data: item.form_data, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{real_value}}">
+    <template is="zcText" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcText" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcText" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcText" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+<view class="ele-container" wx:if="{{!data.content.leftEles[1].hidden}}">
+  <block wx:if="{{data.content.leftEles[1].customFeature.segment == 'default_map' && real_value}}">
+  <!-- 在动态列表中的双栏中绑定地图 -->
+    <template is="zcText" data="{{data:data.content.leftEles[1],  form_data: real_value.form_data}}"></template>
+  </block>
+  <block wx:elif="{{data.content.leftEles[1].customFeature.segment == 'default_map'}}">
+  <!-- 动态列表,动态容器 与详情页绑定地图 -->
+    <template is="zcText" data="{{data:data.content.leftEles[1], form_data: item.form_data, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{real_value}}">
+    <template is="zcText" data="{{data:data.content.leftEles[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcText" data="{{data:data.content.leftEles[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcText" data="{{data:data.content.leftEles[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcText" data="{{data:data.content.leftEles[1], detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+
+</view>
+<view class="cell border-cell" style="{{data.cell_style_2}}">
+  <view class="ele-container" wx:if="{{!data.content.rightEles[0].hidden}}">
+  <block wx:if="{{real_value}}">
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+</view>
+</view>
+
+</template>
+<view class="ele-container" wx:if="{{!data.content[0].hidden}}">
+  <block wx:if="{{real_value}}">
+    <template is="zcLayoutVessel6_0_2_3" data="{{data:data.content[0], real_value:real_value, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcLayoutVessel6_0_2_3" data="{{data:data.content[0], real_value:item, detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+</template>
+<view class="ele-container" wx:if="{{!static_vessel6.hidden}}">
+  <template is="zcStaticVessel6" data="{{data:static_vessel6, detail_data: detail_data}}"></template>
+</view>
+<template name="zcStaticVessel7">
+  <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+    <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+      <view class="element static-vessel" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+        <template is="zcSubStaticVessel7" data="{{data:data, detail_data: detail_data}}"></template>
+      </view>
+    </navigator>
+  </block>
+  <block wx:else>
+    <view class="element static-vessel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <template is="zcSubStaticVessel7" data="{{data:data, detail_data: detail_data}}"></template>
+    </view>
+  </block>
+</template>
+<template name="zcSubStaticVessel7">
+  <view class="ele-container" wx:if="{{!data.content[0].hidden}}">
+  <block wx:if="{{data.content[0].customFeature.segment == 'default_map' && real_value}}">
+  <!-- 在动态列表中的双栏中绑定地图 -->
+    <template is="zcText" data="{{data:data.content[0],  form_data: real_value.form_data}}"></template>
+  </block>
+  <block wx:elif="{{data.content[0].customFeature.segment == 'default_map'}}">
+  <!-- 动态列表,动态容器 与详情页绑定地图 -->
+    <template is="zcText" data="{{data:data.content[0], form_data: item.form_data, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{real_value}}">
+    <template is="zcText" data="{{data:data.content[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcText" data="{{data:data.content[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcText" data="{{data:data.content[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcText" data="{{data:data.content[0], detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+<view class="ele-container" wx:if="{{!data.content[1].hidden}}">
+  <block wx:if="{{data.content[1].customFeature.segment == 'default_map' && real_value}}">
+  <!-- 在动态列表中的双栏中绑定地图 -->
+    <template is="zcText" data="{{data:data.content[1],  form_data: real_value.form_data}}"></template>
+  </block>
+  <block wx:elif="{{data.content[1].customFeature.segment == 'default_map'}}">
+  <!-- 动态列表,动态容器 与详情页绑定地图 -->
+    <template is="zcText" data="{{data:data.content[1], form_data: item.form_data, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{real_value}}">
+    <template is="zcText" data="{{data:data.content[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcText" data="{{data:data.content[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcText" data="{{data:data.content[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcText" data="{{data:data.content[1], detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+
+</template>
+<view class="ele-container" wx:if="{{!static_vessel7.hidden}}">
+  <template is="zcStaticVessel7" data="{{data:static_vessel7, detail_data: detail_data}}"></template>
+</view>
+<view class="ele-container" wx:if="{{!picture8.hidden}}">
+  <block wx:if="{{real_value}}">
+    <template is="zcPicture" data="{{data:picture8, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcPicture" data="{{data:picture8, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcPicture" data="{{data:picture8, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcPicture" data="{{data:picture8, detail_data: detail_data}}"></template>
+  </block>
+</view><view class="ele-container" wx:if="{{!text9.hidden}}">
+  <block wx:if="{{text9.customFeature.segment == 'default_map' && real_value}}">
+  <!-- 在动态列表中的双栏中绑定地图 -->
+    <template is="zcText" data="{{data:text9,  form_data: real_value.form_data}}"></template>
+  </block>
+  <block wx:elif="{{text9.customFeature.segment == 'default_map'}}">
+  <!-- 动态列表,动态容器 与详情页绑定地图 -->
+    <template is="zcText" data="{{data:text9, form_data: item.form_data, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{real_value}}">
+    <template is="zcText" data="{{data:text9, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcText" data="{{data:text9, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcText" data="{{data:text9, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcText" data="{{data:text9, detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+<view class="ele-container" wx:if="{{!text10.hidden}}">
+  <block wx:if="{{text10.customFeature.segment == 'default_map' && real_value}}">
+  <!-- 在动态列表中的双栏中绑定地图 -->
+    <template is="zcText" data="{{data:text10,  form_data: real_value.form_data}}"></template>
+  </block>
+  <block wx:elif="{{text10.customFeature.segment == 'default_map'}}">
+  <!-- 动态列表,动态容器 与详情页绑定地图 -->
+    <template is="zcText" data="{{data:text10, form_data: item.form_data, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{real_value}}">
+    <template is="zcText" data="{{data:text10, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcText" data="{{data:text10, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcText" data="{{data:text10, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcText" data="{{data:text10, detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+<template name="zcLayoutVessel11">
+  <block wx:if="{{data.canIUseNavigatorTarget && data.customFeature.action == 'turn-to-xcx'}}">
+    <navigator target="miniProgram" open-type="navigate" app-id="{{data.customFeature['xcx-appid']}}" path="{{data.customFeature['xcx-page-url'] || ''}}" version="release">
+      <view class="element layout-vessel clearfix" style="{{data.style}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+        <template is="zcSubLayoutVessel11" data="{{data:data, real_value:real_value, detail_data: detail_data}}"></template>
+      </view>
+    </navigator>
+  </block>
+  <block wx:else>
+    <view class="element layout-vessel clearfix" style="{{data.style}}" data-event-params="{{data.eventParams}}"
+          catchtap="{{data.eventHandler}}" bindanimationend="animationEnd" data-compid="{{ data.compId }}">
+      <template is="zcSubLayoutVessel11" data="{{data:data, real_value:real_value, detail_data: detail_data}}"></template>
+    </view>
+  </block>
+</template>
+<template name="zcSubLayoutVessel11">
+  <view class="cell" style="{{data.cell_style_1}}">
+  <view class="ele-container" wx:if="{{!data.content.leftEles[0].hidden}}">
+  <block wx:if="{{real_value}}">
+    <template is="zcPicture" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcPicture" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcPicture" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcPicture" data="{{data:data.content.leftEles[0], detail_data: detail_data}}"></template>
+  </block>
+</view>
+</view>
+<view class="cell border-cell" style="{{data.cell_style_2}}">
+  <view class="ele-container" wx:if="{{!data.content.rightEles[0].hidden}}">
+  <block wx:if="{{real_value}}">
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcPicture" data="{{data:data.content.rightEles[0], detail_data: detail_data}}"></template>
+  </block>
+</view>
+</view>
+
+</template>
+<view class="ele-container" wx:if="{{!layout_vessel11.hidden}}">
+  <block wx:if="{{real_value}}">
+    <template is="zcLayoutVessel11" data="{{data:layout_vessel11, real_value:real_value, detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcLayoutVessel11" data="{{data:layout_vessel11, real_value:item, detail_data: detail_data}}"></template>
+  </block>
+</view>
+
+</view>

@@ -1,0 +1,70 @@
+/* components/shopVipModal/shopVipModal.wxss */
+@charset 'utf-8';
+@import "/utils/font_icon.wxss";
+.shopVipModal-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,.4);
+  z-index: 999;
+}
+.shopVipModal-win{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 560rpx;
+  background: #fff;
+  border-radius: 8rpx;
+  transform: translateX(-50%) translateY(-50%);
+}
+.shopVipModal-vip{
+  height: 643rpx;
+}
+.shopVipModal-upgrade{
+  height: 564rpx;
+}
+.shopVipModal-vip-top {
+  height: 468rpx;
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.shopVipModal-upgrade-top {
+  height: 258rpx;
+  background-position: left top;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.shopVipModal-closes-wrap {
+  height: 98rpx;
+}
+.shopVipModal-closes {
+  float: right;
+  padding: 20rpx;
+  font-size: 36rpx;
+  color: #fff;
+}
+.shopVipModal-p {
+  text-align: center;
+  line-height: 60rpx;
+  font-size: 30rpx;
+  color: #fff;
+}
+.shopVipModal-button {
+  margin-top: 48rpx;
+  width: 460rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 8rpx;
+  font-size: 32rpx;
+  background: #ff7100;
+  color: #fff;
+}
+.shopVipModal-upgrade-text {
+  margin-top: 80rpx;
+  text-align: center;
+  font-size: 28rpx;
+  line-height: 28rpx;
+}

@@ -1,0 +1,15 @@
+{
+  "pages": ["pages/page10000/page10000","pages/classifyGoodsListPage/classifyGoodsListPage"],
+    "subPackages": [{"root":"default","pages":["pages/bindCellphone/bindCellphone","pages/advanceSearch/advanceSearch","pages/extensionPage/extensionPage","pages/userCollect/userCollect"]},{"root":"eCommerce","pages":["pages/myAddress/myAddress","pages/addAddress/addAddress","pages/transferPage/transferPage","pages/transferOrderDetail/transferOrderDetail","pages/transferPaySuccess/transferPaySuccess","pages/searchAddress/searchAddress"]}],
+    "window": {
+    "enablePullDownRefresh": false ,
+    "onReachBottomDistance": "50"
+  },
+    "networkTimeout": {
+    "request": 10000,
+    "connectSocket": 10000,
+    "uploadFile": 10000,
+    "downloadFile": 10000
+  },
+  "debug": false
+}

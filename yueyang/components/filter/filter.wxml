@@ -1,0 +1,74 @@
+<view class="filter-wrap" wx:if="{{filterShow}}">
+  <view class="filter-bg" bindtap="filterHide"></view>
+  <view class="filter-inner active">
+    <view class="filter-cate">
+      <block wx:for="{{category}}" wx:key="id">
+        <view class="filter-box" wx:if="{{item.subclass && item.subclass.length > 0}}">
+          <view class="filter-box-head clearfix" data-id="{{item.id}}" data-index="{{index}}" bindtap="openCate">
+            <view class="filter-box-title">{{item.name}}</view>
+            <view class="filter-box-all" wx:if="{{item.isOpen}}">收起 <label class="ico-moon icon-uparrow"></label></view>
+            <view class="filter-box-all" wx:else>展开 <label class="ico-moon icon-downarrow"></label></view>
+          </view>
+          <view class="filter-box-content cate-content" style="{{item.isOpen ? 'height:' + item.height + 'rpx;' : ''}}">
+            <view class="filter-box-item {{chooseCateId == item.id ? 'active' : ''}}" data-id="{{item.id}}" bindtap="chooseCategory"><label class="filter-subcate-text filter-subcate-noimg">全部</label></view>
+            <block wx:for="{{item.subclass}}" wx:key="id" wx:for-item="subclass">
+              <view class="filter-box-item {{chooseCateId == subclass.id ? 'active' : ''}}" wx:if="{{subclass.logo}}" data-id="{{subclass.id}}" bindtap="chooseCategory"><label class="filter-subcate-text">{{subclass.name}}</label><image class="filter-subcate-img" src="{{subclass.logo}}" mode="aspectFill"></image></view>
+              <view class="filter-box-item {{chooseCateId == subclass.id ? 'active' : ''}}" wx:else data-id="{{subclass.id}}" bindtap="chooseCategory"><label class="filter-subcate-text filter-subcate-noimg">{{subclass.name}}</label></view>
+            </block>
+          </view>
+        </view>
+        <view class="filter-box" wx:else>
+          <view class="filter-box-head clearfix {{chooseCateId == item.id ? 'active' : ''}}" data-id="{{item.id}}" bindtap="chooseCategory">
+            <view class="filter-box-title">{{item.name}}</view>
+            <view class="filter-box-all">查看全部 <label class="ico-moon icon-rightarrow"></label></view>
+            <view class="filter-head-line"></view>
+          </view>
+        </view>
+      </block>
+      <view class="filter-box">
+        <view class="filter-box-head">
+          <view class="filter-box-title">价格区间（元）</view>
+        </view>
+        <view class="filter-box-content">
+          <input class="filter-price-input" type="digit" confirm-type="done" placeholder="最低价" placeholder-style="filter-price-input-place" value="{{leastPrice}}" bindblur="leastPriceInput" /><label class="filter-price-line">-</label><input class="filter-price-input" type="digit" confirm-type="done" placeholder="最高价" placeholder-style="filter-price-input-place" value="{{mostPrice}}" bindblur="mostPriceInput" />
+        </view>
+      </view>
+      <view class="filter-box">
+        <view class="filter-box-head">
+          <view class="filter-box-title">城市选择</view>
+        </view>
+        <view class="filter-box-content">
+          <view class="filter-address {{location ? 'active' : ''}}" catchtap="showMyAddress"><label class="filter-address-icon ico-moon icon-fesadress"></label>{{location || '无'}}</view>
+          <view class="filter-location" bindtap="getLocation"><label class="filter-location-icon ico-moon icon-fesadress"></label>定位</view>
+        </view>
+      </view>
+    </view>
+    <view class="filter-bottom">
+      <view class="filter-reset" bindtap="filterReset">重置</view>
+      <view class="filter-confirm" bindtap="filterConfirm">确定</view>
+    </view>
+  </view>
+  <view class="filter-inner filter-myaddress {{myAddress ? 'active' : ''}}">
+    <view class="filter-inner-head"><label class="filter-inner-head-icon ico-moon icon-leftarrow" bindtap="hideMyAddress"></label>选择地址</view>
+    <view class="filter-myaddress-list">
+      <block wx:for="{{myAddressList}}" wx:key="id">
+        <view class="filter-myaddress-item {{myAddressIndex === index ? 'active' : ''}}" data-id="{{item.id}}" data-index="{{index}}" data-region="{{item.address_info.district.id}}" bindtap="chooseMyAddress"><label class="filter-myaddress-icon ico-moon icon-community-location"></label><text class="filter-myaddress-text">{{item.address_info.province.text + item.address_info.city.text + item.address_info.district.text + (item.detail_address || '')}}</text><label class="filter-myaddress-icon filter-myaddress-gou ico-moon icon-gou"></label></view>
+      </block>
+    </view>
+    <view class="filter-bottom">
+      <view class="filter-confirm" bindtap="showChooseArea">选择其他地址</view>
+    </view>
+  </view>
+  <view class="filter-inner filter-area {{chooseArea ? 'active' : ''}}">
+    <view class="filter-inner-head"><label class="filter-inner-head-icon ico-moon icon-leftarrow" bindtap="hideChooseArea"></label>选择地址</view>
+    <view class="filter-choose-area">
+      <view class="filter-choose-item {{areaType == 'province' ? 'active' : ''}}" bindtap="resetProvince">{{province.name || '请选择省'}}</view><view class="filter-choose-item {{areaType == 'city' ? 'active' : ''}}" wx:if="{{city.name || areaType == 'city'}}" bindtap="resetCity">{{city.name || '请选择市'}}</view><view class="filter-choose-item {{areaType == 'town' ? 'active' : ''}}" wx:if="{{town.name || areaType == 'town'}}">{{town.name || '请选择区'}}</view>
+    </view>
+    <view class="filter-area-list">
+      <!-- <view class="filter-area-item active"><text class="filter-area-text">南山区</text><label class="filter-area-gou ico-moon icon-gou"></label></view> -->
+      <block wx:for="{{areaList}}" wx:key="id">
+        <view class="filter-area-item {{areaId == item.id ? 'active' : ''}}" data-id="{{item.id}}" bindtap="chooseArea"><text class="filter-area-text">{{item.name}}</text><label class="filter-area-gou ico-moon icon-gou"></label></view>
+      </block>
+    </view>
+  </view>
+</view>

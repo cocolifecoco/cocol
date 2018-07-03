@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText":"手机绑定",
+    "usingComponents":{
+        "component-getUserInfo": "/components/getUserInfo/getUserInfo"
+    }
+}
